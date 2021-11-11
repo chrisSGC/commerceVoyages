@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccueilControleur;
+use App\Http\Controllers\AgenceControleur;
+use App\Http\Controllers\BlogControleur;
+use App\Http\Controllers\ContactControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +16,7 @@ use App\Http\Controllers\AccueilControleur;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil');
+Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil.page');
 
 /*Route::get('/', function () {
     return view('welcome');
@@ -21,15 +24,15 @@ Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil');
 Route::get('/voyages', function () {
     return view('welcome');
 });
-Route::get('/blog', function () {
+Route::get('/blog', [BlogControleur::class, 'blog'])->name('blog.page');
+/*Route::get('/blog', function () {
     return view('welcome');
-});
-Route::get('/agence', function () {
+});*/
+Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
+/*Route::get('/contact', function () {
     return view('welcome');
-});
-Route::get('/contact', function () {
-    return view('welcome');
-});
+});*/
+Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
 
 Route::get('/voyages/tous', function() { return view('welcome'); });
 Route::get('/voyages/ile-de-france', function() { return view('welcome'); });
