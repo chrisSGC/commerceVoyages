@@ -82,7 +82,7 @@
                                             <li><a href="/">Acceuil</a></li>
                                             <li><a href="/voyages">Nos voyages</a>
                                                 <ul class="submenu">
-                                                    <li><a href="/voyages/tous">Tous</a></li>
+                                                    <li><a href="/voyages">Tous</a></li>
                                                     <li><a href="/voyages/ile-de-france">Ile de france</a></li>
                                                     <li><a href="/voyages/grand-est">Grand-est</a></li>
                                                     <li><a href="/voyages/bourgogne-franche-comte">Bourgogne Franche-Comte</a></li>

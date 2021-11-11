@@ -5,6 +5,7 @@ use App\Http\Controllers\AccueilControleur;
 use App\Http\Controllers\AgenceControleur;
 use App\Http\Controllers\BlogControleur;
 use App\Http\Controllers\ContactControleur;
+use App\Http\Controllers\VoyageControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,10 @@ Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil.page');
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/voyages', function () {
+Route::get('/voyages', [VoyageControleur::class, 'voyages'])->name('voyages.page');
+/*Route::get('/voyages', function () {
     return view('welcome');
-});
+});*/
 Route::get('/blog', [BlogControleur::class, 'blog'])->name('blog.page');
 /*Route::get('/blog', function () {
     return view('welcome');
@@ -34,7 +36,6 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
 });*/
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
 
-Route::get('/voyages/tous', function() { return view('welcome'); });
 Route::get('/voyages/ile-de-france', function() { return view('welcome'); });
 Route::get('/voyages/grand-est', function() { return view('welcome'); });
 Route::get('/voyages/bourgogne-franche-comte', function() { return view('welcome'); });
