@@ -11,7 +11,6 @@
                             <div class="col-xl-9 col-lg-9 col-md-9">
                                 <div class="hero__caption">
                                     <h1>Trouvez le <span>Tour de France...</span> </h1>
-                                    <p>... de vos reves!</p>
                                 </div>
                             </div>
                         </div>

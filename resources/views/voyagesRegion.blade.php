@@ -25,13 +25,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle text-center">
-                            <span>FEATURED TOURS Packages</span>
-                            <h2>Favourite Places</h2>
+                            <span>Nos voyages</span>
+                            <h2>[{{$region->codeRegion}}] {{$region->nomRegion}}</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row" id="listeVoyages">
-                    @foreach ($neufVoyages as $voyage)
+                    @foreach ($voyagesRegion as $voyage)
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="single-place mb-30">
                                 <div class="place-img">
@@ -57,21 +57,4 @@
             </div>
         </div>
         <!-- Favourite Places End -->
-
-        <!-- Pagination-area Start -->
-        <div class="pagination-area pb-100 text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single-wrap d-flex justify-content-center">
-                            <nav aria-label="Page navigation example">
-                            <a href="#" class="btn border-btn" id="btnPlusVoyages">Voir plus</a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Pagination-area End -->
-
 @endsection

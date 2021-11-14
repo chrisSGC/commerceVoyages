@@ -6,6 +6,7 @@ use App\Http\Controllers\AgenceControleur;
 use App\Http\Controllers\BlogControleur;
 use App\Http\Controllers\ContactControleur;
 use App\Http\Controllers\VoyageControleur;
+use App\Http\Controllers\RegionControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil.page');
     return view('welcome');
 });*/
 Route::get('/voyages', [VoyageControleur::class, 'voyages'])->name('voyages.page');
+Route::get('/voyages/plus', [VoyageControleur::class, 'obtenirPlusVoyages'])->name('voyages.plus');
+Route::get('/voyages/{id}', [VoyageControleur::class, 'voyagesRegion'])->name('voyages.region');
 /*Route::get('/voyages', function () {
     return view('welcome');
 });*/
@@ -35,18 +38,3 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
     return view('welcome');
 });*/
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
-
-Route::get('/voyages/ile-de-france', function() { return view('welcome'); });
-Route::get('/voyages/grand-est', function() { return view('welcome'); });
-Route::get('/voyages/bourgogne-franche-comte', function() { return view('welcome'); });
-Route::get('/voyages/auvergne-rhone-alpes', function() { return view('welcome'); });
-Route::get('/voyages/provence-alpes-cote-d-azur', function() { return view('welcome'); });
-Route::get('/voyages/corse', function() { return view('welcome'); });
-Route::get('/voyages/occitanie', function() { return view('welcome'); });
-Route::get('/voyages/nouvelle-aquitaine', function() { return view('welcome'); });
-Route::get('/voyages/pays-de-la-loire', function() { return view('welcome'); });
-Route::get('/voyages/centre-val-de-loire', function() { return view('welcome'); });
-Route::get('/voyages/bretagne', function() { return view('welcome'); });
-Route::get('/voyages/normandie', function() { return view('welcome'); });
-Route::get('/voyages/hauts-de-france', function() { return view('welcome'); });
-Route::get('/voyages/dom-tom', function() { return view('welcome'); });

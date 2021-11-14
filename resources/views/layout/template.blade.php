@@ -83,20 +83,9 @@
                                             <li><a href="/voyages">Nos voyages</a>
                                                 <ul class="submenu">
                                                     <li><a href="/voyages">Tous</a></li>
-                                                    <li><a href="/voyages/ile-de-france">Ile de france</a></li>
-                                                    <li><a href="/voyages/grand-est">Grand-est</a></li>
-                                                    <li><a href="/voyages/bourgogne-franche-comte">Bourgogne Franche-Comte</a></li>
-                                                    <li><a href="/voyages/auvergne-rhone-alpes">Auvergne-Rhone-Alpes</a></li>
-                                                    <li><a href="/voyages/provence-alpes-cote-d-azur">Provence-Alpes-Cote d'Azur</a></li>
-                                                    <li><a href="/voyages/corse">Corse</a></li>
-                                                    <li><a href="/voyages/occitanie">Occitanie</a></li>
-                                                    <li><a href="/voyages/nouvelle-aquitaine">Nouvelle-Aquitaine</a></li>
-                                                    <li><a href="/voyages/pays-de-la-loire">Pays de la Loire</a></li>
-                                                    <li><a href="/voyages/centre-val-de-loire">Centre-Val-de-Loire</a></li>
-                                                    <li><a href="/voyages/bretagne">Bretagne</a></li>
-                                                    <li><a href="/voyages/normandie">Normandie</a></li>
-                                                    <li><a href="/voyages/hauts-de-france">Hauts-de-France</a></li>
-                                                    <li><a href="/voyages/dom-tom">DOM-TOM</a></li>
+                                                    @foreach (\App\Http\Controllers\RegionControleur::regions() as $region)
+                                                        <li><a href="/voyages/{{$region->id}}">{{$region->nomRegion}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <li><a href="/agence">L'agence</a></li>
@@ -144,12 +133,12 @@
                     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Quick Links</h4>
+                                <h4>En bref</h4>
                                 <ul>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Offers & Discounts</a></li>
-                                    <li><a href="#"> Get Coupon</a></li>
-                                    <li><a href="#">  Contact Us</a></li>
+                                    <li><a href="#">A propos</a></li>
+                                    <li><a href="#">Offres spéciales</a></li>
+                                    <li><a href="#">Offrez une carte cadeau</a></li>
+                                    <li><a href="/contact">Nous contacter</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -157,12 +146,12 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>New Products</h4>
+                                <h4>nouveaux voyages</h4>
                                 <ul>
-                                    <li><a href="#">Woman Cloth</a></li>
-                                    <li><a href="#">Fashion Accessories</a></li>
-                                    <li><a href="#"> Man Accessories</a></li>
-                                    <li><a href="#"> Rubber made Toys</a></li>
+                                    <li><a href="#">Paris de nuit</a></li>
+                                    <li><a href="#">La Loire au fil des siècles</a></li>
+                                    <li><a href="#">Reims, la cité des rois</a></li>
+                                    <li><a href="#">Avignon, résidence forcée des Papes</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -172,11 +161,10 @@
                             <div class="footer-tittle">
                                 <h4>Support</h4>
                                 <ul>
-                                <li><a href="#">Frequently Asked Questions</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Report a Payment Issue</a></li>
+                                <li><a href="#">Question fréquentes</a></li>
+                                <li><a href="#">CGV</a></li>
+                                <li><a href="#">Politique de confidentialité</a></li>
+                                <li><a href="#">Plaintes</a></li>
                             </ul>
                             </div>
                         </div>
@@ -239,6 +227,7 @@
     <!-- Jquery Plugins, main Jquery -->	
     <script src="{{ asset('js/plugins.js')}}"></script>
     <script src="{{ asset('js/main.js')}}"></script>
+    <script src="{{ asset('js/app.js')}}"></script>
     
 </body>
 </html>
