@@ -26,7 +26,7 @@ class VoyageControleur extends Controller{
     public function voyagesRegion($idRegion){ 
         $region = Region::find($idRegion);
         $voyagesRegion = $region->voyagesAssocies;
-
+        
         return view('voyagesRegion')->with('region', $region)->with('voyagesRegion', $voyagesRegion);
     }
 }

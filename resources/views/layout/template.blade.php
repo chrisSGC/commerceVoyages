@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
         <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
    </head>
 
    <body>
@@ -89,7 +90,35 @@
                                                 </ul>
                                             </li>
                                             <li><a href="/agence">L'agence</a></li>
-                                            <li><a href="/blog">Blog</a></li>
+                                            <li><a href="/panier">Panier <span id="articles" class="total-count">{{\App\Http\Controllers\PanierControleur::$nombreArticles}}</span></a>
+                                                <ul class="submenu alternatif">
+                                                    <li class="shopping">
+                                                        <div class="shopping-item">
+                                                            <div class="dropdown-cart-header">
+                                                                <span id="totalArticles">{{\App\Http\Controllers\PanierControleur::$nombreArticles}} Article(s)</span>
+                                                                <a href="/panier">Votre panier</a>
+                                                            </div>
+                                                            <ul class="shopping-list">
+                                                                @foreach (\App\Http\Controllers\PanierControleur::panier() as $itemPanier)
+                                                                    <li data-idPanier="{{$itemPanier->id}}" class="ligne">
+                                                                        <a onClick="supprimerPanier({{$itemPanier->id}})" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                                                        <a class="cart-img" href="#"><img src="{{ asset('img/service/{$itemPanier->voyage_id}') }}" alt="LOGO"></a>
+                                                                        <h4><a href="/voyages/fiche/{{$itemPanier->voyage_id}}">{{$itemPanier->voyage_id}}</a></h4>
+                                                                        <p class="quantity"><span id="qtePanier{{$itemPanier->voyage_id}}">{{$itemPanier->quantite}}</span>x - <span class="amount">{{$itemPanier->quantite}}$</span></p>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                            <div class="bottom">
+                                                                <div class="total">
+                                                                    <span>Total</span>
+                                                                    <span class="total-amount">{{\App\Http\Controllers\PanierControleur::$montant}} $</span>
+                                                                </div>
+                                                                <a href="/panier" class="btn animate">Commander</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
                                             <li><a href="/contact">Contactez-nous</a></li>
                                         </ul>
                                     </nav>
