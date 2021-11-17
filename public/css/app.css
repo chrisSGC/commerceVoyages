@@ -48,24 +48,26 @@
 .shopping-list li {
 	overflow: hidden;
 	border-bottom: 1px solid #e6e6e6;
-	padding-bottom: 15px;
-	margin-bottom: 15px;
+	/*padding-bottom: 15px;
+	margin-bottom: 15px;*/
+	display: flex!important;
 	position:relative;
+	width: 100%;
 }
 .shopping-list li .remove {
-	position: absolute;
+	/*position: absolute!important;*/
 	left: 0;
 	bottom: 16px;
 	margin-top: -20px;
 	height: 20px;
-	width: 20px;
-	line-height: 18px;
+	/*width: 20px!important;
+	line-height: 18px!important;*/
 	text-align: center;
 	background: #fff;
 	color: #222;
 	border-radius: 0;
-	font-size: 11px;
-	border: 1px solid #ededed;
+	font-size: 11px!important;
+	/*border: 1px solid #ededed!important;*/
 }
 .shopping-list li .remove:hover{
 	background:#222;
@@ -89,7 +91,7 @@
 .shopping-list .quantity{
 	line-height: 22px;
     font-size: 13px;
-	padding-bottom: 30px;
+	/*padding-bottom: 30px;*/
 }
 .shopping-list h4 {
 	font-size: 14px;
@@ -97,6 +99,7 @@
 .shopping-list h4 a {
 	font-weight: 600;
 	font-size: 13px;
+	padding: 10px!important;
 	color: #333;
 }
 .shopping-list h4 a:hover{

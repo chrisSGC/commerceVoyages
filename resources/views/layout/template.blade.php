@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{ asset('css/slicknav.css') }}">
         <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
@@ -102,7 +103,6 @@
                                                                 @foreach (\App\Http\Controllers\PanierControleur::panier() as $itemPanier)
                                                                     <li data-idPanier="{{$itemPanier->id}}" class="ligne">
                                                                         <a onClick="supprimerPanier({{$itemPanier->id}})" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                                                        <a class="cart-img" href="#"><img src="{{ asset('img/service/{$itemPanier->voyage_id}') }}" alt="LOGO"></a>
                                                                         <h4><a href="/voyages/fiche/{{$itemPanier->voyage_id}}">{{$itemPanier->voyage_id}}</a></h4>
                                                                         <p class="quantity"><span id="qtePanier{{$itemPanier->voyage_id}}">{{$itemPanier->quantite}}</span>x - <span class="amount">{{$itemPanier->quantite}}$</span></p>
                                                                     </li>
