@@ -187,7 +187,7 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <a href="#" class="btn border-btn">About us</a>
+                                <a href="#" class="btn">About us</a>
                             </div>
                         </div>
                     </div>

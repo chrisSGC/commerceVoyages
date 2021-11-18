@@ -65,7 +65,7 @@
                     <div class="col-xl-12">
                         <div class="single-wrap d-flex justify-content-center">
                             <nav aria-label="Page navigation example">
-                            <a href="#" class="btn border-btn" id="btnPlusVoyages">Voir plus</a>
+                            <a href="#" class="btn" id="btnPlusVoyages">Voir plus</a>
                             </nav>
                         </div>
                     </div>

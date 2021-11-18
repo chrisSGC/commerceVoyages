@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogControleur;
 use App\Http\Controllers\ContactControleur;
 use App\Http\Controllers\VoyageControleur;
 use App\Http\Controllers\RegionControleur;
+use App\Http\Controllers\PanierControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,10 @@ Route::get('/voyages/fiche/{id}', [VoyageControleur::class, 'voyageDetails'])->n
     return view('welcome');
 });*/
 Route::get('/blog', [BlogControleur::class, 'blog'])->name('blog.page');
+Route::get('/panier', [PanierControleur::class, 'panier'])->name('panier.page');
+Route::post('/panier/moins', [PanierControleur::class, 'moins'])->name('panier.moins');
+Route::post('/panier/plus', [PanierControleur::class, 'plus'])->name('panier.plus');
+Route::post('/panier/supprimer', [PanierControleur::class, 'supprimer'])->name('panier.supprimer');
 /*Route::get('/blog', function () {
     return view('welcome');
 });*/
