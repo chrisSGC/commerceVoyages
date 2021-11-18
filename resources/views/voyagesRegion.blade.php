@@ -40,7 +40,7 @@
                                 <div class="place-cap">
                                     <div class="place-cap-top">
                                         <span><i class="fas fa-star"></i><span>8.0 Superb</span> </span>
-                                        <h3><a href="#">{{$voyage->nomVoyage}}</a></h3>
+                                        <h3><a href="/voyages/fiche/{{$voyage->id}}">{{$voyage->nomVoyage}}</a></h3>
                                         <p class="dolor">{{$voyage->prix}}$ <span>/ Par Personne</span></p>
                                     </div>
                                     <div class="place-cap-bottom">

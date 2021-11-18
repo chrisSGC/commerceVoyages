@@ -27,7 +27,7 @@ Route::get('/', [AccueilControleur::class, 'accueil'])->name('accueil.page');
 Route::get('/voyages', [VoyageControleur::class, 'voyages'])->name('voyages.page');
 Route::get('/voyages/plus', [VoyageControleur::class, 'obtenirPlusVoyages'])->name('voyages.plus');
 Route::get('/voyages/{id}', [VoyageControleur::class, 'voyagesRegion'])->name('voyages.region');
-Route::get('/voyages/fiche/{id}', [VoyageControleur::class, 'voyageDetails'])->name('voyages.details');
+Route::get('/voyages/fiche/{id}', [VoyageControleur::class, 'voyageFiche'])->name('voyages.details');
 /*Route::get('/voyages', function () {
     return view('welcome');
 });*/

@@ -29,4 +29,10 @@ class VoyageControleur extends Controller{
         
         return view('voyagesRegion')->with('region', $region)->with('voyagesRegion', $voyagesRegion);
     }
+
+    public function voyageFiche($idVoyage){
+        $voyage = Voyage::find($idVoyage);
+
+        return view('voyageFiche')->with('voyage', $voyage);
+    }
 }
