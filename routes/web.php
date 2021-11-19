@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactControleur;
 use App\Http\Controllers\VoyageControleur;
 use App\Http\Controllers\RegionControleur;
 use App\Http\Controllers\PanierControleur;
+use App\Http\Controllers\ConnexionControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,5 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
     return view('welcome');
 });*/
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
+
+Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');

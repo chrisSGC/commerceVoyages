@@ -461,3 +461,5 @@
 
 .moins{ margin-right:10px; cursor:pointer; }
 .plus{ margin-left:10px; cursor:pointer; }
+
+.inscription, .connexion { width: calc(50% - 5px); }
