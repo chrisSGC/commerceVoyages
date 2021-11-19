@@ -125,8 +125,8 @@
                                 <a href="index.html"><img src="{{ asset('img/logo/logo2_footer.png') }}" alt=""></a>
                             </div>
                             <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p>Lorem iaspsum doldfor sit amvset, consectetur adipisicing cvelit csed do eiusmod tempor incididucvccnt ut labovre.</p>
+                                <div class="footer-pera text-danger">
+                                    <p style="color: red!important; font-weight: bold;">Ce site est 300% illégal car il n'est en aucun cas titulaire d'un permis du Québec valide aupres de l'OPC et n'est pas non plus affilié à une agence de voyage quelquonque titulaire d'un permis.</p>
                                 </div>
                             </div>
                         </div>
