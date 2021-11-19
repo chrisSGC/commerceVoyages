@@ -36,6 +36,7 @@ Route::get('/panier', [PanierControleur::class, 'panier'])->name('panier.page');
 Route::post('/panier/moins', [PanierControleur::class, 'moins'])->name('panier.moins');
 Route::post('/panier/plus', [PanierControleur::class, 'plus'])->name('panier.plus');
 Route::post('/panier/supprimer', [PanierControleur::class, 'supprimer'])->name('panier.supprimer');
+Route::post('/panier/ajouter', [PanierControleur::class, 'ajouter'])->name('panier.ajouter');
 /*Route::get('/blog', function () {
     return view('welcome');
 });*/

@@ -4,11 +4,6 @@ const calculerTaxes = () => {
     let montantTVQ =  parseFloat(montant * 9.975 / 100);
     let total = Number(montant + montantTVQ + montantTPS).toFixed(2);
 
-    console.log(typeof(montant));
-    console.log(typeof(montantTPS));
-    console.log(typeof(montantTVQ));
-    console.log(typeof(total));
-
     document.getElementById("montantTPS").innerText = montantTPS;
     document.getElementById("montantTVQ").innerText = montantTVQ;
     document.getElementById("grandTotal").innerText = total;

@@ -90,4 +90,36 @@ class PanierControleur extends Controller{
             return ["code" => 500];
         }
     }
+
+    public function ajouter(Request $request){
+        $request->validate(['idVoyage'=> ['required', 'numeric', 'gt :0']]);
+        $ip = $request->ip();
+
+        // On vérifie si l'item existe déjà
+        $presenceItem = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->first();
+
+        if($presenceItem){
+            // on ajoute 1 à la quantité
+            $nouvelleQuantite = $presenceItem->quantite + 1;
+
+            Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->update(["quantite" => $nouvelleQuantite]);
+        }else{
+            // On crée l'occurence
+            $item = new Panier();
+            $item->voyage_id = $request->idVoyage;
+            $item->ip = $ip;
+            $item->quantite = 1;
+            $item->save();
+        }
+
+        // recupere la quantite pour idPanier et ip
+        $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->get();
+
+        // Si resultat
+        if($itemAjoute){
+            return ["code" => 200];
+        }else{
+            return ["code" => 500];
+        }
+    }
 }

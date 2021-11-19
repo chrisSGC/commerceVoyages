@@ -27,18 +27,18 @@
                    <img class="img-fluid" src="{{ asset('img/hero/blog/single_blog_1.png') }}" alt="">
                 </div>
                 <div class="blog_details">
-                   <table>
+                   <table class="w-100">
                        <tr>
-                           <th>Date</th><td>DFGFGDF</td>
+                           <th>Date</th><td>{{$voyage->dateDebut}}</td>
                         </tr>
                         <tr>
-                           <th>Departement</th><td>DFGFGDF</td>
+                           <th>Departement</th><td>[{{$voyage->codeDepartement}}] - {{$voyage->nomDepartement}}</td>
                         </tr>
                         <tr>
-                           <th>Ville</th><td>DFGFGDF</td>
+                           <th>Ville</th><td>{{$voyage->ville}}</td>
                         </tr>
                         <tr>
-                           <th>Duree</th><td>DFGFGDF</td>
+                           <th>Duree</th><td>{{$voyage->duree}} jours</td>
                        </tr>
                    </table>
                 </div>
@@ -47,18 +47,14 @@
           <div class="col-lg-4">
              <div class="blog_right_sidebar">
                 <aside class="single_sidebar_widget search_widget">
-                    <div><h2>PRIX</h2></div>
-                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">Ajouter a mon panier</button>
+                    <div><h2>{{$voyage->prix}}$</h2></div>
+                    <div id="csrf" style="display: none">@csrf</div>
+                    <button onClick='ajouterVoyageAuPanier({{$voyage->idVoyage}})' class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button">Ajouter a mon panier</button>
                 </aside>
                 <aside class="single_sidebar_widget post_category_widget">
                    <h4 class="widget_title">Categorie</h4>
                    <ul class="list cat-list">
-                      <li>
-                         <a href="#" class="d-flex">
-                            <p>Resaurant food</p>
-                            <p>(37)</p>
-                         </a>
-                      </li>
+                     <li><p>{{$voyage->categorie}}</p></li>
                    </ul>
                 </aside>
              </div>
@@ -66,5 +62,6 @@
        </div>
     </div>
  </section>
+ <script src="{{ asset('js/voyage.js')}}"></script>
  <!--================ Blog Area end =================-->
 @endsection
