@@ -9,6 +9,7 @@ use App\Http\Controllers\VoyageControleur;
 use App\Http\Controllers\RegionControleur;
 use App\Http\Controllers\PanierControleur;
 use App\Http\Controllers\ConnexionControleur;
+use App\Http\Controllers\CommandeControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,10 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
 
 Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
+Route::post('/connexion/validerConnexion', [ConnexionControleur::class, 'validerConnexion'])->name('connexion.validerConnexion');
+Route::post('/connexion/validerInscription', [ConnexionControleur::class, 'validerInscription'])->name('connexion.validerInscription');
 Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
+
+Route::get('/commande', [CommandeControleur::class, 'commande'])->name('commande.page');
+Route::post('/commande/validerCommande', [CommandeControleur::class, 'validerCommande'])->name('commande.validerCommande');
+Route::get('/commande/confirmer', [CommandeControleur::class, 'confirmer'])->name('commande.confirmerCommande');

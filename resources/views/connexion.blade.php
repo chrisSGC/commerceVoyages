@@ -22,34 +22,69 @@
     
     <div class="shopping-cart section">
         <div class="container">
+            @if ($errors->any())  
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger">  
+                            <strong>Woop woop</strong> Hmmm ca sent l'illégalité ici! On va te balancer à la maréchaussée!!<br>
+                            <ul class="list-unstyled">  
+                                @foreach ($errors->all() as $error)  
+                                    <li>{{ $error }}</li>  
+                                @endforeach  
+                            </ul>  
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12 col-lg-6">
                     <h2>Inscription</h2>
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <form class="form-contact contact_form" action="/connexion/validerInscription" method="post" id="contactForm" novalidate="novalidate">
                         @csrf
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="prenom">Prénom</label>
-                                    <input class="form-control valid" name="prenom" id="prenom" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez vote prénom'" placeholder="Prénom">
+                                    <input class="form-control valid" value="{{ old('prenom') }}" name="prenom" id="prenom" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez vote prénom'" placeholder="Prénom">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="nom">Nom</label>
-                                    <input class="form-control valid" name="nom" id="nom" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre nom de famille'" placeholder="Nom">
+                                    <input class="form-control valid" value="{{ old('nom') }}" name="nom" id="nom" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre nom de famille'" placeholder="Nom">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="form-group">
+                                    <label for="genre">Genre</label>
+                                    <select class="w-100 valid" value="{{ old('genre') }}" name="genre" id="genre" >
+                                        <option>Choisissez votre genre</option>
+                                        <option value="M">Homme</option>
+                                        <option value="F">Femme</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="courriel">Adresse courriel</label>
-                                    <input class="form-control valid" name="courriel" id="courriel" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre adresse courriel'" placeholder="Courriel">
+                                    <input class="form-control valid" value="{{ old('courriel') }}" name="courriel" id="courriel" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre adresse courriel'" placeholder="Courriel">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="form-group">
+                                    <label for="premierContact">Comment vous avez-nous trouvé?</label>
+                                    <select class="w-100 valid" value="{{ old('premierContact') }}" name="premierContact" id="premierContact" >
+                                        <option>Choisissez votre moyen de premier contact</option>
+                                        @foreach($premierContact as $contact)
+                                            <option value="{{$contact->id}}">{{$contact->premiercontact}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="identifiantComtpe">Mot de passe</label>
-                                    <input class="form-control valid" name="identifiantComtpe" id="identifiantComtpe" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre mot de passe'" placeholder="Mot de passe">
+                                    <label for="motDePasse">Mot de passe</label>
+                                    <input class="form-control valid" value="{{ old('motDePasse') }}" name="motDePasse" id="motDePasse" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre mot de passe'" placeholder="Mot de passe">
                                 </div>
                             </div>
                         </div>
@@ -60,24 +95,29 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <h2>Connexion</h2>
-                    <form class="form-contact contact_form" action="" method="post" id="connexion" novalidate="novalidate">
+                    <form class="form-contact contact_form" action="/connexion/validerConnexion" method="post" id="connexion" novalidate="novalidate">
+                        @if($erreurConnexion == 1)
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Oh non!</strong> Il semblerait que vous essayez d'entrer illégalement en France? Tssss la PAF va vous tomber dessus!
+                            </div>
+                        @endif
                         <div id="csrfConnexion">@csrf</div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="email">Adresse courriel</label>
-                                    <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                                    <input class="form-control valid" value="{{ old('email') }}" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="identifiant">Mot de passe</label>
-                                    <input class="form-control valid" name="identifiant" id="identifiant" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Mot de passe">
+                                    <input class="form-control valid" value="{{ old('identifiant') }}" name="identifiant" id="identifiant" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Mot de passe">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <div onClick="connexion()" class="button button-contactForm boxed-btn">Connexion</div>
+                            <button type="submit" class="button button-contactForm boxed-btn">Connexion</button>
                         </div>
                     </form>
                 </div>

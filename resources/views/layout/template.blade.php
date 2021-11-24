@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
    </head>
 {{ \App\Http\Controllers\PanierControleur::initialiserPanier() }}
    <body>
@@ -93,7 +94,7 @@
                                             <li><a href="/agence">L'agence</a></li>
                                             <li><a href="/panier">Panier <span id="articles" class="total-count">{{\App\Http\Controllers\PanierControleur::$nombreArticles}}</span></a></li>
                                             <li><a href="/contact">Contactez-nous</a></li>
-                                            <li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>
+                                            <!--<li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>-->
                                         </ul>
                                     </nav>
                                 </div>
@@ -221,7 +222,7 @@
     <script src="{{ asset('js/jquery.sticky.js')}}"></script>
     
     <!-- contact js -->
-    <script src="{{ asset('js/contact.js')}}"></script>
+    <!--<script src="{{ asset('js/contact.js')}}"></script>-->
     <script src="{{ asset('js/jquery.form.js')}}"></script>
     <script src="{{ asset('js/jquery.validate.min.js')}}"></script>
     <script src="{{ asset('js/mail-script.js')}}"></script>
