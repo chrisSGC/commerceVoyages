@@ -48,8 +48,8 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="identifiant">Mot de passe</label>
-                                    <input class="form-control valid" name="identifiant" id="identifiant" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre mot de passe'" placeholder="Mot de passe">
+                                    <label for="identifiantComtpe">Mot de passe</label>
+                                    <input class="form-control valid" name="identifiantComtpe" id="identifiantComtpe" type="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez votre mot de passe'" placeholder="Mot de passe">
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <h2>Connexion</h2>
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                        @csrf
+                    <form class="form-contact contact_form" action="" method="post" id="connexion" novalidate="novalidate">
+                        <div id="csrfConnexion">@csrf</div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -77,13 +77,13 @@
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Connexion</button>
+                            <div onClick="connexion()" class="button button-contactForm boxed-btn">Connexion</div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/panier.js')}}"></script>
+    <script src="{{ asset('js/connexion.js')}}"></script>
     <!--================Blog Area =================-->
 @endsection

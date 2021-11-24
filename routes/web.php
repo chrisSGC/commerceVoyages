@@ -48,3 +48,4 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
 
 Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
+Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
