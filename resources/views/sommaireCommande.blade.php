@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="alert alert-success">
-                        <strong>Achat confirmé!</strong> Merci d'avoir acheté en toute illégalité vos prochaine vacances [avortées]! Un conseiller en voyage [ne] vous contera [pas] bientot afin de compléter les dernières formalités pour vos billets et l'imigration.
+                        <strong>Achat confirmé!</strong> Merci d'avoir acheté en toute illégalité vos prochaine vacances [avortées]! Un conseiller en voyage [ne] vous contactera [pas] bientot afin de compléter les dernières formalités pour vos billets et l'imigration.
                     </div>
                 </div>
             </div>

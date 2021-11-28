@@ -8,7 +8,7 @@ use App\Models\Region;
 class RegionControleur extends Controller{
     //
     public static function regions(){ 
-        $listeRegions = Region::all();
+        $listeRegions = Region::where("afficher", 1)->get();
 
         return $listeRegions;
     }

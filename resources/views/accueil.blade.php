@@ -22,16 +22,6 @@
                                     <div class="input-form mb-30">
                                         <input type="text" placeholder="Dites-nous ou vous voulez aller ?">
                                     </div>
-                                    <div class="select-form mb-30">
-                                        <div class="select-itms">
-                                            <select name="select" id="select1">
-                                                <option value="">Quoi</option>
-                                                @foreach ($categories as $categorie)
-                                                    <option value="{{$categorie->id}}">{{$categorie->categorie}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="search-form mb-30">
                                         <a href="#">Recherche</a>
                                     </div>	

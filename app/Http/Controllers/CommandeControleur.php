@@ -24,16 +24,15 @@ class CommandeControleur extends Controller{
         if($request->session()->missing('utilisateur')){
             return redirect('/connexion');
         }else{
-            $utilisateur = Client::find($request->session()->get('utilisateur'))->first();
+            $utilisateur = Client::where('id', $request->session()->get('utilisateur'))->first();
+
             $montant = 0;
             $annee = date("Y");
             $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->get();
 
             $nombreArticles = $contenuPanier->sum("quantite");
 
-            foreach($contenuPanier as $item) {
-                $montant += $item->quantite * $item->prix;
-            }
+            foreach($contenuPanier as $item) { $montant += $item->quantite * $item->prix; }
 
             return view('commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
         }
@@ -52,9 +51,7 @@ class CommandeControleur extends Controller{
 
             $nombreArticles = $contenuPanier->sum("quantite");
 
-            foreach($contenuPanier as $item) {
-                $montant += $item->quantite * $item->prix;
-            }
+            foreach($contenuPanier as $item){ $montant += $item->quantite * $item->prix; }
 
             $request->validate(['adresse'=> ['required', 'string'], 'ville' => ['required', 'string', 'min:3', 'max:30'], 'codePostal' => ['required', 'string', 'min:6', 'max:7'], 'province' => ['required', 'integer', 'min:1', 'max:12'], 'telephone' => ['required', 'regex:^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$^'], 'nomCarte' => ['required', 'string'], 'numeroCarte' => ['required', 'string'], 'moisCarte' => ['required', 'integer', 'min:1', 'max:12'], 'anneeCarte' => ['required', 'integer', 'min:'.$annee, 'max:'.($annee + 6)], 'cvv' => ['required', 'integer', 'min:000', 'max:999']]);
 
@@ -71,6 +68,7 @@ class CommandeControleur extends Controller{
                 $vente->quantite = $item->quantite;
                 $vente->client_id = $utilisateur->id;
                 $vente->voyage_id = $item->voyage_id;
+                $vente->prix_paye = $item->prix;
                 $vente->save();
 
                 // ajouter paiement
@@ -81,15 +79,16 @@ class CommandeControleur extends Controller{
                 $paiement->save();
 
                 // vider le panier
-                Panier::where('id', $item->id)->delete();
+                Panier::where('id', $item->idPanier)->delete();
 
                 $compteurPaye++;
             }
 
-            if($compteurPaye != 0){ redirect('/commande/confirmer'); }
-
-            
-            return view('commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
+            if($compteurPaye != 0){
+                return redirect('/commande/confirmer');
+            }else{
+                return view('commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
+            }            
         }
     }
 

@@ -23,8 +23,6 @@ class PanierControleur extends Controller{
     public static function panier(){
         self::initialiserPanier();
 
-        //dump(self::$contenuPanier);
-
         return view('panier')->with('contenuPanier', self::$contenuPanier)->with('nombreArticles', self::$nombreArticles)->with('montant', self::$montant);
     }
 

@@ -31,9 +31,7 @@ class VoyageControleur extends Controller{
     }
 
     public function voyageFiche($idVoyage){
-        //$voyage = Voyage::find($idVoyage);
         $voyage = Voyage::select("voyage.id as idVoyage", "voyage.*", "categorie.categorie", "departement.nomDepartement", "departement.codeDepartement")->join('categorie', 'categorie.id', '=', 'voyage.categorie_id')->join('departement', 'departement.id', '=', 'voyage.departement_id')->where('voyage.id', $idVoyage)->first();
-//dd($voyage);
 
         return view('voyageFiche')->with('voyage', $voyage);
     }
