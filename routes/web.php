@@ -10,6 +10,7 @@ use App\Http\Controllers\RegionControleur;
 use App\Http\Controllers\PanierControleur;
 use App\Http\Controllers\ConnexionControleur;
 use App\Http\Controllers\CommandeControleur;
+use App\Http\Controllers\CompteControleur;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,8 @@ Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('conne
 Route::post('/connexion/validerConnexion', [ConnexionControleur::class, 'validerConnexion'])->name('connexion.validerConnexion');
 Route::post('/connexion/validerInscription', [ConnexionControleur::class, 'validerInscription'])->name('connexion.validerInscription');
 Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
+
+Route::get('/historique', [CompteControleur::class, 'historique'])->name('historique.page');
 
 Route::get('/commande', [CommandeControleur::class, 'commande'])->name('commande.page');
 Route::post('/commande/validerCommande', [CommandeControleur::class, 'validerCommande'])->name('commande.validerCommande');

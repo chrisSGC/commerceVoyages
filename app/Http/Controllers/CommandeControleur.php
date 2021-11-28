@@ -56,7 +56,7 @@ class CommandeControleur extends Controller{
             $request->validate(['adresse'=> ['required', 'string'], 'ville' => ['required', 'string', 'min:3', 'max:30'], 'codePostal' => ['required', 'string', 'min:6', 'max:7'], 'province' => ['required', 'integer', 'min:1', 'max:12'], 'telephone' => ['required', 'regex:^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$^'], 'nomCarte' => ['required', 'string'], 'numeroCarte' => ['required', 'string'], 'moisCarte' => ['required', 'integer', 'min:1', 'max:12'], 'anneeCarte' => ['required', 'integer', 'min:'.$annee, 'max:'.($annee + 6)], 'cvv' => ['required', 'integer', 'min:000', 'max:999']]);
 
             // modifier les infos client
-            Client::where("id", "=", $utilisateur->id)->update(["adresse" => $request->adresse, "ville" => $request->ville, "cp" => $request->codePostal, "province_id" => $request->province, "telephone" => $request->telephone]);
+            Client::where("id", "=", $request->session()->get('utilisateur'))->update(["adresse" => $request->adresse, "ville" => $request->ville, "cp" => $request->codePostal, "province_id" => $request->province, "telephone" => $request->telephone]);
 
             $date = new \DateTime();
             $date = $date->format('Y-m-d');
@@ -66,7 +66,7 @@ class CommandeControleur extends Controller{
                 $vente = new Vente();
                 $vente->dateVente = $date;
                 $vente->quantite = $item->quantite;
-                $vente->client_id = $utilisateur->id;
+                $vente->client_id = $request->session()->get('utilisateur');
                 $vente->voyage_id = $item->voyage_id;
                 $vente->prix_paye = $item->prix;
                 $vente->save();

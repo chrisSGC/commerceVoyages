@@ -81,7 +81,7 @@
                                 <!-- Main-menu -->
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>               
-                                        <ul id="navigation">                                                                                                                                     
+                                        <ul id="navigation">
                                             <li><a href="/">Acceuil</a></li>
                                             <li><a href="/voyages">Nos voyages</a>
                                                 <ul class="submenu">
@@ -94,7 +94,12 @@
                                             <li><a href="/agence">L'agence</a></li>
                                             <li><a href="/panier">Panier <span id="articles" class="total-count">{{\App\Http\Controllers\PanierControleur::$nombreArticles}}</span></a></li>
                                             <li><a href="/contact">Contactez-nous</a></li>
-                                            <!--<li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>-->
+                                            @if(\App\Http\Controllers\CompteControleur::verifierConnexion())
+                                                <li><a href="/historique">Mes achats</a></li>
+                                                <li><a href="/connexion/quitter" class="button button-contactForm boxed-btn">Déconnexion</a></li>
+                                            @else
+                                                <li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>
