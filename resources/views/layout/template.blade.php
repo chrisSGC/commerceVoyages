@@ -96,7 +96,7 @@
                                             <li><a href="/contact">Contactez-nous</a></li>
                                             @if(\App\Http\Controllers\CompteControleur::verifierConnexion())
                                                 <li><a href="/historique">Mes achats</a></li>
-                                                <li><a href="/connexion/quitter" class="button button-contactForm boxed-btn">Déconnexion</a></li>
+                                                <li><a href="/deconnexion" class="button button-contactForm boxed-btn">Déconnexion</a></li>
                                             @else
                                                 <li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>
                                             @endif

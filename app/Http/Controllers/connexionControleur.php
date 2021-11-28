@@ -21,6 +21,11 @@ class ConnexionControleur extends Controller{
         return view('connexion')->with('erreurConnexion', 0)->with('premierContact', Premiercontact::All());
     }
 
+    public function deconnexion(Request $request){
+        $request->session()->forget('utilisateur');
+        return redirect('/');
+    }
+
     public function validerInscription(Request $request){
         $erreurConnexion = 0;
         $premierContact = Premiercontact::All();

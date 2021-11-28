@@ -43,7 +43,7 @@
                                 <span class="flaticon-tour"></span>
                             </div>
                             <div class="services-cap">
-                                <h5>8000+ Our Local<br>Guides</h5>
+                                <h5>8000+ Nos experts<br>de la France</h5>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                 <span class="flaticon-pay"></span>
                             </div>
                             <div class="services-cap">
-                                <h5>100% Trusted Tour<br>Agency</h5>
+                                <h5>100% de satisfaction<br>client truquée</h5>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 <span class="flaticon-experience"></span>
                             </div>
                             <div class="services-cap">
-                                <h5>28+ Years of Travel<br>Experience</h5>
+                                <h5>28+ années d'anraques<br>organisées</h5>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                 <span class="flaticon-good"></span>
                             </div>
                             <div class="services-cap">
-                                <h5>98% Our Travelers<br>are Happy</h5>
+                                <h5>98% voyageurs refoulés<br>à la douane</h5>
                             </div>
                         </div>
                     </div>
@@ -127,11 +127,11 @@
                     <div class="col-xl-12">
                         <div class="video-caption text-center">
                             <div class="video-icon">
-                                <a class="popup-video" href="https://www.youtube.com/watch?v=1aP-TXUpNoU" tabindex="0"><i class="fas fa-play"></i></a>
+                                <a class="popup-video" href="https://youtu.be/1SBS_Y2q528" tabindex="0"><i class="fas fa-play"></i></a>
                             </div>
-                            <p class="pera1">Love where you're going in the perfect time</p>
-                            <p class="pera2">Tripo is a World Leading Online</p>
-                            <p class="pera3"> Tour Booking Platform</p>
+                            <p class="pera1">Aimez ce qu'offrent nos concurents</p>
+                            <p class="pera2">YvanDvoyages est le leader mondial</p>
+                            <p class="pera3"> de l'arnaque au voyage</p>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         <div class="support-location-img mb-50">
                             <img src="{{ asset('img/service/support-img.jpg') }}" alt="">
                             <div class="support-img-cap">
-                                <span>Since 1992</span>
+                                <span>Depuis 1992</span>
                             </div>
                         </div>
                     </div>
@@ -154,30 +154,30 @@
                         <div class="right-caption">
                             <!-- Section Tittle -->
                             <div class="section-tittle section-tittle2">
-                                <span>About Our Company</span>
-                                <h2>We are Go Trip <br>Ravels Support Company</h2>
+                                <span>A propos de nous</span>
+                                <h2>nous sommes <br>YvanDvoyages</h2>
                             </div>
                             <div class="support-caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                <p>Le leader de alv ente de voyages illégaux vers la France car nous n'avons aucun permis de l'OPC.</p>
                                 <div class="select-suport-items">
-                                    <label class="single-items">Lorem ipsum dolor sit amet
+                                    <label class="single-items">Aucun permis de l'OPC
                                         <input type="checkbox" checked="checked active">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="single-items">Consectetur adipisicing sed do
+                                    <label class="single-items">Totallement illegal
                                         <input type="checkbox" checked="checked active">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="single-items">Eiusmod tempor incididunt
+                                    <label class="single-items">Support 24/24 7/7 avant encaissement
                                         <input type="checkbox" checked="checked active">
                                         <span class="checkmark"></span>
                                     </label>
-                                    <label class="single-items">Ad minim veniam, quis nostrud.
+                                    <label class="single-items">Nous aimons nos clients
                                         <input type="checkbox" checked="checked active">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <a href="#" class="btn">About us</a>
+                                <a href="#" class="btn">A propos de nous</a>
                             </div>
                         </div>
                     </div>
@@ -197,8 +197,7 @@
                                 <div class="testimonial-caption ">
                                     <div class="testimonial-top-cap">
                                         <img src="assets/img/icon/testimonial.png" alt="">
-                                        <p>Logisti Group is a representative logistics operator providing full range of ser
-                                            of customs clearance and transportation worl.</p>
+                                        <p>J'ai acheté sur YvanDVoyages 3 fois et tout s'est bien passé en graissant la patte du douanier en arrivant à papeette.</p>
                                     </div>
                                     <!-- founder -->
                                     <div class="testimonial-founder d-flex align-items-center justify-content-center">
@@ -207,7 +206,6 @@
                                         </div>
                                         <div class="founder-text">
                                             <span>Jessya Inn</span>
-                                            <p>Co Founder</p>
                                         </div>
                                     </div>
                                 </div>
@@ -218,8 +216,7 @@
                                 <div class="testimonial-caption ">
                                     <div class="testimonial-top-cap">
                                         <img src="{{ asset('img/icon/testimonial.png') }}" alt="">
-                                        <p>Logisti Group is a representative logistics operator providing full range of ser
-                                            of customs clearance and transportation worl.</p>
+                                        <p>Oubliez le précédent commentaire, je viens de me faire arreter pour immigration illégal à mon 4e voyage. On  m'a dit que je n'avais pas mon autorisation de voyage à mon arrivée alros que Yvan m'avait assuré que oui.</p>
                                     </div>
                                     <!-- founder -->
                                     <div class="testimonial-founder d-flex align-items-center justify-content-center">
@@ -228,7 +225,6 @@
                                         </div>
                                         <div class="founder-text">
                                             <span>Jessya Inn</span>
-                                            <p>Co Founder</p>
                                         </div>
                                     </div>
                                 </div>
@@ -239,57 +235,4 @@
             </div>
         </div>
         <!-- Testimonial End -->
-        <!-- Blog Area Start -->
-        <div class="home-blog-area section-padding2">
-            <div class="container">
-                <!-- Section Tittle -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle text-center">
-                            <span>Our Recent news</span>
-                            <h2>Tourist Blog</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="home-blog-single mb-30">
-                            <div class="blog-img-cap">
-                                <div class="blog-img">
-                                    <img src="{{ asset('img/blog/home-blog1.jpg') }}" alt="">
-                                </div>
-                                <div class="blog-cap">
-                                    <p> |   Traveling</p>
-                                    <h3><a href="single-blog.html">Tips For Taking A Long-Term Trip With Kids.</a></h3>
-                                    <a href="#" class="more-btn">Read more »</a>
-                                </div>
-                            </div>
-                            <div class="blog-date text-center">
-                                <span>24</span>
-                                <p>Now</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="home-blog-single mb-30">
-                            <div class="blog-img-cap">
-                                <div class="blog-img">
-                                    <img src="{{ asset('img/blog/home-blog2.jpg') }}" alt="">
-                                </div>
-                                <div class="blog-cap">
-                                    <p> |   Traveling</p>
-                                    <h3><a href="single-blog.html">Tips For Taking A Long-Term Trip With Kids.</a></h3>
-                                    <a href="#" class="more-btn">Read more »</a>
-                                </div>
-                            </div>
-                            <div class="blog-date text-center">
-                                <span>24</span>
-                                <p>Now</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Blog Area End -->
 @endsection
