@@ -20,7 +20,7 @@
                                 <!-- form -->
                                 <form action="#" class="search-box">
                                     <div class="input-form mb-30">
-                                        <input type="text" placeholder="Dites-nous ou vous voulez aller ?">
+                                        <input type="text" placeholder="Dites-nous ou vous voulez aller ? (NON FONCTIONNELLE)">
                                     </div>
                                     <div class="search-form mb-30">
                                         <a href="#">Recherche</a>

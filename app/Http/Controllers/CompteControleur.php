@@ -11,6 +11,14 @@ class CompteControleur extends Controller{
         return (session()->missing('utilisateur')) ? false : true;
     }
 
+    public static function obtenirTypeCompte(){
+        if(session()->has('administrateur')){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
     public function historique(){
         if(session()->missing('utilisateur')){
             return redirect('/connexion');
