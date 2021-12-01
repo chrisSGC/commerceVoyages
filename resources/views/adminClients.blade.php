@@ -23,15 +23,15 @@
             <tbody>
                 @foreach ($listeClients as $client)
                     <tr class="text-center">
-                        <td>{{$client->id}}</td>
+                        <td>{{$client->idClient}}</td>
                         <td class="text-start">{{$client->prenom}}</td>
                         <td class="text-start">{{$client->nom}}</td>
                         <td>{{$client->genre}}</td>
                         <td class="text-start">{{$client->adresse}}<br>{{$client->cp}} {{$client->ville}}</td>
                         <td>{{$client->telephone}}</td>
                         <td>{{$client->courriel}}</td>
-                        <td>{{$client->province_id}}</td>
-                        <td>{{$client->premierContact_id}}</td>
+                        <td>[{{$client->codeProvince}}] {{$client->province}}</td>
+                        <td>{{$client->premierContact}}</td>
                     </tr>
                 @endforeach
             </tbody>
