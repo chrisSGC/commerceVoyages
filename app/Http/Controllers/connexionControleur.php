@@ -23,6 +23,7 @@ class ConnexionControleur extends Controller{
 
     public function deconnexion(Request $request){
         $request->session()->forget('utilisateur');
+        $request->session()->forget('administrateur');
         return redirect('/');
     }
 
@@ -61,7 +62,7 @@ class ConnexionControleur extends Controller{
         if($request->email == "admin@admin.ca"){
             if($request->identifiant == "admin"){
                 session(['administrateur' => "JeSuisUnSuperAdmin"]);
-                return redirect('/');
+                return redirect('/dashboard');
             }else{
                 $erreurConnexion = 1;
             }

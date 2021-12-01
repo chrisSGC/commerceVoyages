@@ -8,6 +8,8 @@ use App\Models\Categorie;
 
 class AccueilControleur extends Controller{
     public function accueil(){
+        if(session()->has('administrateur')){ return redirect('/dashboard'); }
+
         $sixVoyages = Voyage::skip(0)->take(6)->get();
         $categories = Categorie::all();
 
