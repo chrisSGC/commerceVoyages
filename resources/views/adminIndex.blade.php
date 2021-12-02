@@ -17,132 +17,45 @@
 
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
-    <h2>Section title</h2>
+    <h2>Les 20 dernieres ventes ventes</h2>
     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td>1,001</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-            </tr>
-            <tr>
-            <td>1,002</td>
-            <td>placeholder</td>
-            <td>irrelevant</td>
-            <td>visual</td>
-            <td>layout</td>
-            </tr>
-            <tr>
-            <td>1,003</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-            </tr>
-            <tr>
-            <td>1,003</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-            </tr>
-            <tr>
-            <td>1,004</td>
-            <td>text</td>
-            <td>random</td>
-            <td>layout</td>
-            <td>dashboard</td>
-            </tr>
-            <tr>
-            <td>1,005</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>placeholder</td>
-            </tr>
-            <tr>
-            <td>1,006</td>
-            <td>dashboard</td>
-            <td>illustrative</td>
-            <td>rich</td>
-            <td>data</td>
-            </tr>
-            <tr>
-            <td>1,007</td>
-            <td>placeholder</td>
-            <td>tabular</td>
-            <td>information</td>
-            <td>irrelevant</td>
-            </tr>
-            <tr>
-            <td>1,008</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-            </tr>
-            <tr>
-            <td>1,009</td>
-            <td>placeholder</td>
-            <td>irrelevant</td>
-            <td>visual</td>
-            <td>layout</td>
-            </tr>
-            <tr>
-            <td>1,010</td>
-            <td>data</td>
-            <td>rich</td>
-            <td>dashboard</td>
-            <td>tabular</td>
-            </tr>
-            <tr>
-            <td>1,011</td>
-            <td>information</td>
-            <td>placeholder</td>
-            <td>illustrative</td>
-            <td>data</td>
-            </tr>
-            <tr>
-            <td>1,012</td>
-            <td>text</td>
-            <td>placeholder</td>
-            <td>layout</td>
-            <td>dashboard</td>
-            </tr>
-            <tr>
-            <td>1,013</td>
-            <td>dashboard</td>
-            <td>irrelevant</td>
-            <td>text</td>
-            <td>visual</td>
-            </tr>
-            <tr>
-            <td>1,014</td>
-            <td>dashboard</td>
-            <td>illustrative</td>
-            <td>rich</td>
-            <td>data</td>
-            </tr>
-            <tr>
-            <td>1,015</td>
-            <td>random</td>
-            <td>tabular</td>
-            <td>information</td>
-            <td>text</td>
-            </tr>
-        </tbody>
+        <table class="table table-striped table-borderless table-hover table-sm">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Produit</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">PU</th>
+                    <th scope="col">Qte</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Montant percu</th>
+                    <th scope="col">Etat</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($listeVentesFinale as $vente)
+                    @if($vente->etatVente)
+                        <tr class="text-center">
+                    @else
+                        <tr class="bg-warning text-center">
+                    @endif
+                        <td>{{$vente->idVente}}</td>
+                        <td class="text-start">{{$vente->nomClient}}</td>
+                        <td class="text-start">{{$vente->nomVoyage}}</td>
+                        <td>{{$vente->dateVente}}</td>
+                        <td>{{number_format($vente->prix, 2, ',', ' ')}} $</td>
+                        <td>{{number_format($vente->quantite, 0)}}</td>
+                        <td>{{number_format($vente->prix * $vente->quantite, 2, ',', ' ')}} $</td>
+                        <td>{{number_format($vente->montantPercu, 2, ',', ' ')}} $</td>
+                        @if($vente->etatVente)
+                            <td><span class="badge bg-success">Payé</span></td> 
+                        @else
+                            <td><span class="badge bg-danger">Paiement nécessaire</span></td> 
+                        @endif
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 @endsection

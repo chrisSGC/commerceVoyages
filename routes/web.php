@@ -58,5 +58,6 @@ Route::get('/commande/confirmer', [CommandeControleur::class, 'confirmer'])->nam
 
 Route::get('/dashboard', [TableauDeBordControleur::class, 'accueil'])->name('dashboard.page');
 Route::get('/ventes', [VentesAdminControleur::class, 'accueil'])->name('ventes.page');
+Route::get('/ventes/details/{id}', [VentesAdminControleur::class, 'detailsPaiements'])->name('ventes.paiements');
 Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
 Route::get('/listeVoyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');

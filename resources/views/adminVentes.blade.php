@@ -23,9 +23,9 @@
             <tbody>
                 @foreach ($listeVentesFinale as $vente)
                     @if($vente->etatVente)
-                        <tr class="text-center">
+                        <tr style="cursor: pointer;" onClick="afficherPaiements({{$vente->idVente}})" class="text-center">
                     @else
-                        <tr class="bg-warning text-center">
+                        <tr style="cursor: pointer;" onClick="afficherPaiements({{$vente->idVente}})" class="bg-warning text-center">
                     @endif
                         <td>{{$vente->idVente}}</td>
                         <td class="text-start">{{$vente->nomClient}}</td>
@@ -41,8 +41,25 @@
                             <td><span class="badge bg-danger">Paiement nécessaire</span></td> 
                         @endif
                     </tr>
+                    <tr class="d-none" id="paiements_{{$vente->idVente}}">
+                        <td colspan="9">
+                            <table class="table table-borderless table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listePaiements_{{$vente->idVente}}">
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    <script src="{{ asset('js/admin/ventes.js')}}"></script>
 @endsection
