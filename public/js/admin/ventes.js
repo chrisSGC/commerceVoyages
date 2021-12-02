@@ -1,5 +1,4 @@
 const afficherPaiements = async (idVente) => {
-    
     if(document.getElementById("paiements_"+idVente).classList.contains("d-none")){
         if(!isNaN(idVente)){
             const detailsPaiements = await fetch('/ventes/details/'+idVente, {
@@ -13,7 +12,7 @@ const afficherPaiements = async (idVente) => {
                 if(paiementsTrouves.donnees.length > 0){
                     let contenu = '';
 
-                    paiementsTrouves.donnees.map(paiement => { contenu += "<tr><td>&nbsp;&nbsp;</td><td>"+paiement.id+"</td><td>"+paiement.date+"</td><td>"+paiement.prix+"$</td></tr>"});
+                    paiementsTrouves.donnees.map(paiement => { contenu += "<tr><td>&nbsp;&nbsp;</td><td>"+paiement.id+"</td><td>"+paiement.datePaiement+"</td><td>"+paiement.montantPaiement+"$</td></tr>"});
 
                     document.getElementById("listePaiements_"+idVente).innerHTML = contenu;
                 }else{

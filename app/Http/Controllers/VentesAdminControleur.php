@@ -24,11 +24,9 @@ class VentesAdminControleur extends Controller{
         return view('adminVentes')->with('listeVentesFinale', json_decode(json_encode($listeVentesFinale), FALSE));
     }
     
-    public function obtenirPlusVoyages($idVente){ 
-        $neufVoyagesDePlus = Paiement::where('vente_id', $idVente)->get();
+    public function detailsPaiements($idVente){ 
+        $paiements = Paiement::where('vente_id', $idVente)->get();
 
-        self::$offset = self::$offset + 9; // modifier pour avoir soit l'offset de 9 soit le nombre de trouvés
-
-        return ["code" => 200, "donnees" => $neufVoyagesDePlus];
+        return json_encode(["code" => 200, "donnees" => $paiements]);
     }
 }

@@ -22,7 +22,6 @@
                 }
             </style>
         
-            
             <!-- Custom styles for this template -->
             <link href="{{ asset('css/admin/bootstrap.css') }}" rel="stylesheet">
             <link href="{{ asset('css/admin/dashboard.css') }}" rel="stylesheet">
