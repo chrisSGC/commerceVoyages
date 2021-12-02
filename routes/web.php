@@ -65,3 +65,5 @@ Route::get('/ventes/supprimerPaiement/{id}', [VentesAdminControleur::class, 'sup
 Route::get('/ventes/annulerVente/{id}', [VentesAdminControleur::class, 'annulerVente'])->name('ventes.annulerVente');
 Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
 Route::get('/listeVoyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');
+Route::get('/supprimerVoyage/{id}', [VoyagesAdminControleur::class, 'supprimerVoyage'])->name('voyages.supprimerVoyage');
+Route::get('/nouveauVoyage', [VoyagesAdminControleur::class, 'nouveauVoyage'])->name('voyages.nouveauVoyage');

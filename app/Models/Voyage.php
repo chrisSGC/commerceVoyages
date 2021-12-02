@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Voyage extends Model{
     protected $table = 'voyage';
+    protected $fillable = ['actif'];
     use HasFactory;
 }
