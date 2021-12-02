@@ -59,5 +59,9 @@ Route::get('/commande/confirmer', [CommandeControleur::class, 'confirmer'])->nam
 Route::get('/dashboard', [TableauDeBordControleur::class, 'accueil'])->name('dashboard.page');
 Route::get('/ventes', [VentesAdminControleur::class, 'accueil'])->name('ventes.page');
 Route::get('/ventes/details/{id}', [VentesAdminControleur::class, 'detailsPaiements'])->name('ventes.paiements');
+Route::post('/ventes/ajouterPaiement', [VentesAdminControleur::class, 'ajouterPaiement'])->name('ventes.ajouterPaiement');
+Route::post('/ventes/ajouterVente', [VentesAdminControleur::class, 'ajouterVente'])->name('ventes.ajouterVente');
+Route::get('/ventes/supprimerPaiement/{id}', [VentesAdminControleur::class, 'supprimerPaiement'])->name('ventes.supprimerPaiement');
+Route::get('/ventes/annulerVente/{id}', [VentesAdminControleur::class, 'annulerVente'])->name('ventes.annulerVente');
 Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
 Route::get('/listeVoyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vente extends Model{
     protected $table = 'vente';
+    protected $fillable = ['etat'];
     use HasFactory;
 
     public function voyageAssocie(){
