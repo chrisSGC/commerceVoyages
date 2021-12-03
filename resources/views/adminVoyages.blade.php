@@ -2,12 +2,10 @@
 
 @section('contenuAdmin')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Liste des voyages</h1>
-    </div>
-    <h2>Liste des voyages</h2>
-    <div class="col-12">
+        <h1 class="h2">Gestion des voyages</h1>
         <a href="/nouveauVoyage" class="btn btn-primary">Ajouter un voyage</a>
     </div>
+    <h2>Liste des voyages</h2>
     <div class="table-responsive">
         <table class="table table-striped table-borderless table-hover table-sm">
             <thead>

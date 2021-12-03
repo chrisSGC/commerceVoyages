@@ -67,3 +67,4 @@ Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('client
 Route::get('/listeVoyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');
 Route::get('/supprimerVoyage/{id}', [VoyagesAdminControleur::class, 'supprimerVoyage'])->name('voyages.supprimerVoyage');
 Route::get('/nouveauVoyage', [VoyagesAdminControleur::class, 'nouveauVoyage'])->name('voyages.nouveauVoyage');
+Route::post('/ajouterVoyage', [VoyagesAdminControleur::class, 'ajouterVoyage'])->name('voyages.ajouterVoyage');

@@ -4,6 +4,7 @@
 <?php echo"<script>window.listeVoyages = ".json_encode($listeVoyages).";</script>";?>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Historiques des ventes</h1>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#nouvelleVenteModal">Ajouter une vente</button>
     </div>
     <h2>Liste des ventes</h2>
     <div class="alert col-12 alert-primary" role="alert">
@@ -15,8 +16,7 @@
         <hr>
         <p>Cette page liste les ventes de la plus récente à la plus ancienne. cliquez sur une vente pour voir les paiements recus associés à cette dernière.</p>
         <p>Dans le cas ou vous avez recu un paiement depuis une autre plateforme que le site, vous pouvez ajouter un paiement mannuellement en cliquant sur l'icone ICONE et en entrant les données.</p>
-        <p>Il est aussi possible d'ajouter depuis cette page une nouvell vente.</p>
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#nouvelleVenteModal">Ajouter une vente</button>
+        <p>Il est aussi possible d'ajouter depuis cette page une nouvelle vente.</p>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-borderless table-hover table-sm">
