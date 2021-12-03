@@ -63,8 +63,9 @@ Route::post('/ventes/ajouterPaiement', [VentesAdminControleur::class, 'ajouterPa
 Route::post('/ventes/ajouterVente', [VentesAdminControleur::class, 'ajouterVente'])->name('ventes.ajouterVente');
 Route::get('/ventes/supprimerPaiement/{id}', [VentesAdminControleur::class, 'supprimerPaiement'])->name('ventes.supprimerPaiement');
 Route::get('/ventes/annulerVente/{id}', [VentesAdminControleur::class, 'annulerVente'])->name('ventes.annulerVente');
-Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
 Route::get('/listeVoyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');
 Route::get('/supprimerVoyage/{id}', [VoyagesAdminControleur::class, 'supprimerVoyage'])->name('voyages.supprimerVoyage');
 Route::get('/nouveauVoyage', [VoyagesAdminControleur::class, 'nouveauVoyage'])->name('voyages.nouveauVoyage');
 Route::post('/ajouterVoyage', [VoyagesAdminControleur::class, 'ajouterVoyage'])->name('voyages.ajouterVoyage');
+Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
+Route::get('/nouveauClient', [ClientsAdminControleur::class, 'nouveauClient'])->name('clients.nouveauClient');

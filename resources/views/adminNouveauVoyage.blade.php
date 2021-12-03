@@ -59,7 +59,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-row-reverse">
                 <button class="btn btn-success" type="submit">Ajouter</button>
             </div>
         </form>
