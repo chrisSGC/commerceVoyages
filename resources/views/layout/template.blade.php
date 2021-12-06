@@ -49,13 +49,13 @@
                                     <a class="nav-link active" aria-current="page" href="/dashboard"><span data-feather="home"></span> Tableau de bord</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/ventes"><span data-feather="file"></span> Ventes</a>
+                                    <a class="nav-link" href="/gestion/ventes"><span data-feather="file"></span> Ventes</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/listeVoyages"><span data-feather="shopping-cart"></span> Voyages</a>
+                                    <a class="nav-link" href="/gestion/voyages"><span data-feather="shopping-cart"></span> Voyages</a>
                                 </li>
                                 <li class="nav-item">
-                                <a class="nav-link" href="/clients"><span data-feather="users"></span> Clients</a>
+                                <a class="nav-link" href="/gestion/clients"><span data-feather="users"></span> Clients</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><span data-feather="bar-chart-2"></span> Statistiques</a>

@@ -1,7 +1,7 @@
 const afficherPaiements = async (idVente) => {
     if(document.getElementById("paiements_"+idVente).classList.contains("d-none")){
         if(!isNaN(idVente)){
-            const detailsPaiements = await fetch('/ventes/details/'+idVente, {
+            const detailsPaiements = await fetch('/gestion/ventes/details/'+idVente, {
                 method: "GET",
                 headers: {'Accept': 'application/json' }
             });
@@ -37,7 +37,7 @@ document.getElementById('validerAjout').addEventListener("click", async (event) 
     event.preventDefault();
     let form = new FormData(document.getElementById("formAjoutPaiement"));
 
-    const ajoutPaiement = await fetch('/ventes/ajouterPaiement', {
+    const ajoutPaiement = await fetch('/gestion/ventes/ajouterPaiement', {
         method: "POST", body: form,
         headers: {'Accept': 'application/json' }
     });
@@ -67,7 +67,7 @@ document.getElementById("validerAjoutVente").addEventListener("click", async (ev
     event.preventDefault();
     let form = new FormData(document.getElementById("formAjoutVente"));
 
-    const ajoutVente = await fetch('/ventes/ajouterVente', {
+    const ajoutVente = await fetch('/gestion/ventes/ajouterVente', {
         method: "POST", body: form,
         headers: {'Accept': 'application/json' }
     });
@@ -116,7 +116,7 @@ document.getElementById("formAjoutVente").addEventListener("change", () => {
 
 const supprimerPaiement = async (el, idPaiement) => {
     
-    const retraitPaiement = await fetch('/ventes/supprimerPaiement/'+idPaiement, {
+    const retraitPaiement = await fetch('/gestion/ventes/supprimerPaiement/'+idPaiement, {
         method: "GET", 
         headers: {'Accept': 'application/json' }
     });
@@ -129,7 +129,7 @@ const supprimerPaiement = async (el, idPaiement) => {
 }
 
 const annulerVente = async (el, idvente) => {
-    const retraitVente = await fetch('/ventes/annulerVente/'+idvente, {
+    const retraitVente = await fetch('/gestion/ventes/annulerVente/'+idvente, {
         method: "GET", 
         headers: {'Accept': 'application/json' }
     });

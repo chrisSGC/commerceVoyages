@@ -3,9 +3,9 @@
 @section('contenuAdmin')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Gestion des clients</h1>
-        <a href="/clients" class="btn btn-primary">Retour</a>
+        <a href="/gestion/clients" class="btn btn-primary">Retour</a>
     </div>
-    <h2>Ajouter un client</h2>
+    <h2>{{ $mode == "ajout" ? "Ajouter" : "Modifier" }} un client</h2>
     
     @if ($errors->any())
         <div class="col-12">
@@ -20,8 +20,13 @@
         </div>
     @endif
     <div class="table-responsive">
-        <form action="/ajouterClient" method="post">
+        <form action="/gestion/enregistrerClient" method="post">
             @csrf
+            <input type="hidden" name="mode" value="{{$mode}}" />
+            @if($mode == "modification")
+                <input type="hidden" name="idClient" value="{{$idClient}}" />
+                <input type="hidden" name="motDePasse" class="form-control" value="{{@old('motDePasse')}}" id="motDePasse" />
+            @endif
             <div class="mb-3">
                 <label for="prenom" class="form-label">Prénom</label>
                 <input type="text" name="prenom" class="form-control" value="{{@old('prenom')}}" id="prenom" placeholder="Prénom" required>
@@ -80,12 +85,14 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="motDePasse" class="form-label">Mot de passe du compte client</label>
-                <input type="password" name="motDePasse" class="form-control" value="{{@old('motDePasse')}}" id="motDePasse" placeholder="Mot de passe du compte client" required>
-            </div>
+            @if($mode == 'ajout')
+                <div class="mb-3">
+                    <label for="motDePasse" class="form-label">Mot de passe du compte client</label>
+                    <input type="password" name="motDePasse" class="form-control" value="{{@old('motDePasse')}}" id="motDePasse" placeholder="Mot de passe du compte client" required>
+                </div>
+            @endif
             <div class="mb-3 d-flex flex-row-reverse">
-                <button class="btn btn-success" type="submit">Ajouter</button>
+                <button class="btn btn-success" type="submit">{{ $mode == "ajout" ? "Ajouter" : "Modifier" }}</button>
             </div>
         </form>
     </div>
