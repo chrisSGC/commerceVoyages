@@ -34,8 +34,8 @@ class VoyagesAdminControleur extends Controller{
         if(session()->missing('administrateur')){ return redirect('/'); }
         $lesDepartements = Departement::all();
         $lesCategories = Categorie::all();
-        $request['departementsPossibles'] = $this->obtenirListeDepartements($lesDepartements);
-        $request['categoriesPossibles'] = $this->obtenirListeCategories($lesCategories);
+        //$request['departementsPossibles'] = $this->obtenirListeDepartements($lesDepartements);
+        //$request['categoriesPossibles'] = $this->obtenirListeCategories($lesCategories);
         $departementsPossibles = $lesDepartements->count();
         $categoriesPossibles = $lesCategories->count();
 

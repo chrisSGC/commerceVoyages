@@ -69,3 +69,6 @@ Route::get('/nouveauVoyage', [VoyagesAdminControleur::class, 'nouveauVoyage'])->
 Route::post('/ajouterVoyage', [VoyagesAdminControleur::class, 'ajouterVoyage'])->name('voyages.ajouterVoyage');
 Route::get('/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
 Route::get('/nouveauClient', [ClientsAdminControleur::class, 'nouveauClient'])->name('clients.nouveauClient');
+Route::post('/ajouterClient', [ClientsAdminControleur::class, 'ajouterClient'])->name('clients.ajouterClient');
+Route::get('/modifierClient/{id}', [ClientsAdminControleur::class, 'modifierClient'])->name('clients.modifierClient');
+Route::get('/editionClient/{mode}/{id?}', [ClientsAdminControleur::class, 'editionClient'])->name('clients.editionClient');
