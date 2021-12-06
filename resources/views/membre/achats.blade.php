@@ -34,6 +34,7 @@
                                 <th class="text-center">NOMBRE DE VOYAGEURS</th>
                                 <th class="text-center">TOTAL</th> 
                                 <th class="text-center">PAIEMENT RECU</th> 
+                                <th class="text-center">PAIEMENTS</th> 
                                 <th class="text-center">ETAT</th> 
                             </tr>
                         </thead>
@@ -50,10 +51,13 @@
                                     <th class="text-center"><span class="qteObj">{{$item->quantite}}</span></th>
                                     <th class="text-center">{{number_format($item->prix * $item->quantite, 2, ',', ' ')}} $</th> 
                                     <th class="text-center">{{number_format($item->montantPercu, 2, ',', ' ')}} $</th> 
-                                    @if($item->etatVente)
+                                    @if($item->etatPaiement)
                                         <th class="text-center"><span class="badge badge-success">Payé</span></th> 
                                     @else
                                         <th class="text-center"><span class="badge badge-danger">Paiement nécessaire</span></th> 
+                                    @endif
+                                    @if($item->etatVente == 0)
+                                        <th class="text-center"><span class="badge badge-danger">Vente annulée</span></th> 
                                     @endif
                                 </tr>
                             @endforeach

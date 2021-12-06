@@ -31,7 +31,7 @@ class CompteControleur extends Controller{
                 // recuepre le montant percu
                 $montant = Paiement::where('vente_id', $vente->idVente)->sum('montantPaiement');
 
-                $contenuFinal[] = ["nomVoyage" => $vente->nomVoyage, "dateVente" => $vente->dateVente, "quantite" => $vente->quantite, 'prix' => $vente->prix, 'montantPercu' => $montant, 'etatVente' => (($montant == ($vente->quantite * $vente->prix)) ? true : false)];
+                $contenuFinal[] = ["nomVoyage" => $vente->nomVoyage, "dateVente" => $vente->dateVente, "quantite" => $vente->quantite, 'prix' => $vente->prix, 'montantPercu' => $montant, 'etatPaiement' => (($montant == ($vente->quantite * $vente->prix)) ? true : false), 'etatVente' => $vente->etat];
             }
 
             return view('achats')->with('contenuVentes', json_decode(json_encode($contenuFinal), FALSE));

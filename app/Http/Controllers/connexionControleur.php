@@ -90,6 +90,8 @@ class ConnexionControleur extends Controller{
     }
 
     public function verifierCompte(Request $request){
+        $request->validate(['email'=> ['required', 'email', 'email:rfc,dns'], 'identifiant' => ['required', 'alpha_num']]);
+        
         $infosCompte = Client::select("motDePasse", "id")->where('courriel', $request->courriel)->first();
 
         if($infosCompte){

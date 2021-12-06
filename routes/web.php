@@ -47,7 +47,7 @@ Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.pag
 Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
 Route::post('/connexion/validerConnexion', [ConnexionControleur::class, 'validerConnexion'])->name('connexion.validerConnexion');
 Route::post('/connexion/validerInscription', [ConnexionControleur::class, 'validerInscription'])->name('connexion.validerInscription');
-Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
+//Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
 Route::get('/deconnexion', [ConnexionControleur::class, 'deconnexion'])->name('deconnexion.page');
 
 Route::get('/historique', [CompteControleur::class, 'historique'])->name('historique.page');

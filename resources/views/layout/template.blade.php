@@ -87,6 +87,7 @@
             <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
             <!-- CSS here -->
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
             <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
@@ -279,6 +280,7 @@
             </footer>
 
             <!-- JS here -->
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
             <!-- All JS Custom Plugins Link Here here -->
             <script src="{{ asset('js/vendor/modernizr-3.5.0.min.js')}}"></script>
