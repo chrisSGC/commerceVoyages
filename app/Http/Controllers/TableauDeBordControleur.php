@@ -21,6 +21,6 @@ class TableauDeBordControleur extends Controller{
             $listeVentesFinale[] = ["idVente" => $vente->idVente, "nomVoyage" => $vente->nomVoyage, "dateVente" => $vente->dateVente, "quantite" => $vente->quantite, 'prix' => $vente->prix, 'montantPercu' => $montant, 'nomClient' => $vente->prenom.' '.$vente->nom, 'etatVente' => (($montant == ($vente->quantite * $vente->prix)) ? true : false)];
         }
         
-        return view('adminIndex')->with('listeVentesFinale', json_decode(json_encode($listeVentesFinale), FALSE));
+        return view('admin.dashboard')->with('listeVentesFinale', json_decode(json_encode($listeVentesFinale), FALSE));
     }
 }

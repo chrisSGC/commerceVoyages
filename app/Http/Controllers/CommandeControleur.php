@@ -34,7 +34,7 @@ class CommandeControleur extends Controller{
 
             foreach($contenuPanier as $item) { $montant += $item->quantite * $item->prix; }
 
-            return view('commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
+            return view('membre.commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
         }
     }
 
@@ -87,7 +87,7 @@ class CommandeControleur extends Controller{
             if($compteurPaye != 0){
                 return redirect('/commande/confirmer');
             }else{
-                return view('commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
+                return view('membre.commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
             }            
         }
     }
@@ -96,7 +96,7 @@ class CommandeControleur extends Controller{
         if($request->session()->missing('utilisateur')){
             return redirect('/connexion');
         }else{
-            return view('sommaireCommande');
+            return view('membre.sommaireCommande');
         }
     }
 }
