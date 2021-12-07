@@ -15,16 +15,6 @@ use App\Models\Client;
 use App\Models\Premiercontact;
 
 class ConnexionControleur extends Controller{
-    private function obtenirListePremierContact($premierContact){
-        $array = [];
-        
-        foreach($premierContact as $contact){
-            $array[] = $contact->id;
-        }
-
-        return $array;
-    }
-
     /**
      * Page de connexion / inscription
      * 
@@ -32,8 +22,8 @@ class ConnexionControleur extends Controller{
      *
      * @return void
      */
-    public function connexion(){
-        return view('connexion')->with('erreurConnexion', 0)->with('premierContact', Premiercontact::All());
+    public function connexion($provenance){
+        return view('connexion')->with('erreurConnexion', 0)->with('premierContact', Premiercontact::All())->with('provenance', $provenance);
     }
 
     /**
@@ -61,18 +51,16 @@ class ConnexionControleur extends Controller{
     public function validerInscription(Request $request){
         $erreurConnexion = 0;
         $premierContact = Premiercontact::All();
+        $nbrPC = $premierContact->count() + 1;
 
-        $request['genresPossibles'] = ['M', 'F'];
-        $request['premierContactPossibles'] = $this->obtenirListePremierContact($premierContact);
-
-        $request->validate(['courriel'=> ['required', 'email', 'email:rfc,dns', 'unique:client'], 'prenom' => ['required', 'string', 'min:3', 'max:20'], 'nom' => ['required', 'string', 'min:3', 'max:20'], 'motDePasse' => ['required', 'alpha_num', 'min:8', 'max: 20'], 'genre' => ['required', 'in_array:genresPossibles'], 'premierContact' => ['required', 'in_array:premierContactPossibles']]);
+        $request->validate(['courriel'=> ['required', 'email', 'unique:client'], 'prenom' => ['required', 'string', 'min:3', 'max:20'], 'nom' => ['required', 'string', 'min:3', 'max:20'], 'motDePasse' => ['required', 'alpha_num', 'min:8', 'max: 20'], 'genre' => ['required', 'string'], 'premierContact' => ['required', 'integer', 'gt:0', 'lt:'.$nbrPC], 'provenance' => ['required', 'integer', 'gt:0', 'lt:3']]);
 
         // On crée le client
         $client = new Client();
         $client->prenom = $request->prenom;
         $client->nom = $request->nom;
         $client->courriel = $request->courriel;
-        $client->motDePasse = $request->motDePasse;
+        $client->motDePasse = $this->crypterDonnee($request->motDePasse);
         $client->genre = $request->genre;
         $client->premierContact_id = $request->premierContact;
         $client->save();
@@ -81,9 +69,9 @@ class ConnexionControleur extends Controller{
         
         session(['utilisateur' => $infosCompte->id]);
 
-        if(session('utilisateur')){ return redirect('/commande'); }
+        if(session('utilisateur')){ return ($request->provenance == 2) ? redirect('/commande') : redirect('/'); }
 
-        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', $premierContact);
+        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', $premierContact)->with('provenance', $request->provenance);
 
     }
 
@@ -108,7 +96,7 @@ class ConnexionControleur extends Controller{
                 $erreurConnexion = 1;
             }
         }else{
-            $request->validate(['email'=> ['required', 'email', 'email:rfc,dns'], 'identifiant' => ['required', 'alpha_num']]);
+            $request->validate(['email'=> ['required', 'email'], 'identifiant' => ['required', 'alpha_num'], 'provenance' => ['required', 'integer', 'gt:0', 'lt:3']]);
 
             $infosCompte = Client::select("motDePasse", "id")->where('courriel', $request->email)->first();
 
@@ -116,7 +104,7 @@ class ConnexionControleur extends Controller{
                 if ($this->verifierConcordance($request->identifiant, $infosCompte->motDePasse)) {
                     // rediriger vers la page des infos de paiement
                     session(['utilisateur' => $infosCompte->id]);
-                    return redirect('/commande');
+                    return ($request->provenance == 2) ? redirect('/commande') : redirect('/');
                 } else {
                     // rester sur la page avec une erreur
                     $erreurConnexion = 1;
@@ -127,34 +115,11 @@ class ConnexionControleur extends Controller{
             }
         }
         
-        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', Premiercontact::All());
-    }
-
-    /**
-     * Ajax vérification de compte des
-     * N'est plus utilisée
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function verifierCompte(Request $request){
-        $request->validate(['email'=> ['required', 'email', 'email:rfc,dns'], 'identifiant' => ['required', 'alpha_num']]);
-        
-        $infosCompte = Client::select("motDePasse", "id")->where('courriel', $request->courriel)->first();
-
-        if($infosCompte){
-            if(verifierConcordance($request->motDePasse, $infosCompte->motDePasse)){
-                return ["code" => 200, "donnees" => ["id" => $infosCompte->id]];
-            }else{
-                return ["code" => 500, "donnees" => "Impossible de répondre à la demande"];
-            }
-        }else{
-            return ["code" => 500, "donnees" => "Impossible de répondre à la demande"];
-        }
+        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', Premiercontact::All())->with('provenance', $request->provenance);
     }
     
     /**
-     * PErmet d'encrypter une donnée à la BCrypt
+     * Permet d'encrypter une donnée à la BCrypt
      *
      * @param [type] $aEncoder
      * @return void

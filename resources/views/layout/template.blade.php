@@ -174,7 +174,7 @@
                                                         <li><a href="/historique">Mes achats</a></li>
                                                         <li><a href="/deconnexion" class="button button-contactForm boxed-btn">Déconnexion</a></li>
                                                     @else
-                                                        <li><a href="/connexion" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>
+                                                        <li><a href="/connexion/1" class="button button-contactForm boxed-btn">Connexion / Inscription</a></li>
                                                     @endif
                                                 </ul>
                                             </nav>

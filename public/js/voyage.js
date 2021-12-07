@@ -15,8 +15,8 @@ const ajouterVoyageAuPanier = async (idVoyage) => {
     const nouvelItem = await ajoutItem.json();
 
     if(nouvelItem.code === 200){
-        alert('SUCCESS');
+        Toastify({ text: "Voyage ajouté au panier.", duration: 3000, style: {background: "rgb(5, 150, 105)"} }).showToast();
     }else{
-        alert('DANGER');
+        Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
     }
 }

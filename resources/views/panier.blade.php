@@ -70,7 +70,7 @@
                                         <li class="last">Total<span id="grandTotal">{{number_format(($montant + ($montant * 5 / 100) + ($montant * 9.975 / 100)), 2, ',', ' ')}}</span> $</li>
                                     </ul>
                                     <div class="button5">
-                                        <a href="/connexion" class="btn btn-block mb-2">COMMANDER</a>
+                                        <a href="/connexion/2" class="btn btn-block mb-2">COMMANDER</a>
                                         <a href="/voyages" class="btn btn-block">Continuer mes achats</a>
                                     </div>
                                 </div>

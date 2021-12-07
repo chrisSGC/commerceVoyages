@@ -11,6 +11,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Voyage;
 use App\Models\Region;
 
@@ -49,8 +50,12 @@ class VoyageControleur extends Controller{
      * @return void
      */
     public function voyagesRegion($idRegion){ 
+        $validations = Validator::make(['idRegion' => $idRegion], ['idRegion' => 'required|integer|gt:0']);
+        if($validations->fails()){ return redirect('/'); }
+
         $region = Region::find($idRegion);
-        $voyagesRegion = $region->voyagesAssocies;
+        //$voyagesRegion = $region->voyagesAssocies; Nous aurions pu utiliser cela, cependant, comme nous ne voulons que les voyages actifs, nous ne pouvons pas
+        $voyagesRegion = Voyage::select('voyage.*')->where('region_id', '=', $idRegion)->where('actif', '=', 1)->join('departement', 'voyage.departement_id', '=', 'departement.id')->get();
         
         return view('voyagesRegion')->with('region', $region)->with('voyagesRegion', $voyagesRegion);
     }
@@ -62,6 +67,9 @@ class VoyageControleur extends Controller{
      * @return void
      */
     public function voyageFiche($idVoyage){
+        $validations = Validator::make(['idVoyage' => $idVoyage], ['idVoyage' => 'required|integer|gt:0']);
+        if($validations->fails()){ return redirect('/'); }
+        
         $voyage = Voyage::select("voyage.id as idVoyage", "voyage.*", "categorie.categorie", "departement.nomDepartement", "departement.codeDepartement")->join('categorie', 'categorie.id', '=', 'voyage.categorie_id')->join('departement', 'departement.id', '=', 'voyage.departement_id')->where('voyage.id', $idVoyage)->where('actif', '=', 1)->first();
 
         return view('voyageFiche')->with('voyage', $voyage);

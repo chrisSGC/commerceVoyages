@@ -44,7 +44,7 @@ Route::get('/agence', [AgenceControleur::class, 'agence'])->name('agence.page');
 
 Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.page');
 
-Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
+Route::get('/connexion/{provenance}', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
 Route::post('/connexion/validerConnexion', [ConnexionControleur::class, 'validerConnexion'])->name('connexion.validerConnexion');
 Route::post('/connexion/validerInscription', [ConnexionControleur::class, 'validerInscription'])->name('connexion.validerInscription');
 Route::get('/deconnexion', [ConnexionControleur::class, 'deconnexion'])->name('deconnexion.page');

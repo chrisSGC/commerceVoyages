@@ -88,7 +88,7 @@
                                             <select class="w-100 valid" value="{{ old('province') }}" name="province" id="province" >
                                                 <option>Choisissez votre province</option>
                                                 @foreach($provinces as $province)
-                                                    <option value="{{$province->id}}">[{{$province->codeProvince}}] {{$province->province}}</option>
+                                                    <option {{ old('province') == $province->id ? "selected" : "" }} value="{{$province->id}}">[{{$province->codeProvince}}] {{$province->province}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

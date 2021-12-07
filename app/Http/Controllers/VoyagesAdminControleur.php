@@ -35,7 +35,7 @@ class VoyagesAdminControleur extends Controller{
      * @return void
      */
     public function editionVoyage($mode, $idVoyage = null){
-        if($idVoyage != null){
+        if($idVoyage != null && is_numeric($idVoyage)){
             $voyage = Voyage::find($idVoyage);
 
             session()->put('_old_input', ['nomVoyage'=> $voyage->nomVoyage, 'prixVoyage'=> $voyage->prix, 'dateVoyage'=> $voyage->dateDebut, 'dureeVoyage'=> $voyage->duree, 'departementVoyage'=> $voyage->departement_id, 'villeVoyage' => $voyage->ville, 'categorieVoyage' => $voyage->categorie_id]);

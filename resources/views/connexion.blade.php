@@ -41,6 +41,7 @@
                     <h2>Inscription</h2>
                     <form class="form-contact contact_form" action="/connexion/validerInscription" method="post" id="contactForm" novalidate="novalidate">
                         @csrf
+                        <input type="hidden" name="provenance" value="{{$provenance}}" />
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -59,8 +60,8 @@
                                     <label for="genre">Genre</label>
                                     <select class="w-100 valid" value="{{ old('genre') }}" name="genre" id="genre" >
                                         <option>Choisissez votre genre</option>
-                                        <option value="M">Homme</option>
-                                        <option value="F">Femme</option>
+                                        <option {{ old('genre') == "M" ? "selected" : "" }} value="M">Homme</option>
+                                        <option {{ old('genre') == "F" ? "selected" : "" }} value="F">Femme</option>
                                     </select>
                                 </div>
                             </div>
@@ -76,7 +77,7 @@
                                     <select class="w-100 valid" value="{{ old('premierContact') }}" name="premierContact" id="premierContact" >
                                         <option>Choisissez votre moyen de premier contact</option>
                                         @foreach($premierContact as $contact)
-                                            <option value="{{$contact->id}}">{{$contact->premiercontact}}</option>
+                                            <option {{ old('premierContact') == $contact->id ? "selected" : "" }} value="{{$contact->id}}">{{$contact->premierContact}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -102,6 +103,7 @@
                             </div>
                         @endif
                         <div id="csrfConnexion">@csrf</div>
+                        <input type="hidden" name="provenance" value="{{$provenance}}" />
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -124,6 +126,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/connexion.js')}}"></script>
     <!--================Blog Area =================-->
 @endsection
