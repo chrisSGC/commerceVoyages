@@ -1,5 +1,13 @@
 <?php
-// middleware auth group
+/***
+ * @author Christophe Ferru <christophe.ferru@gmail.com>
+ * @copyright 2021 Christophe Ferru
+ * @project YvanDesVoyages
+ * @system Admin - Gestion des voyages
+ * 
+ * TP Fin de session Programmation web Avancée - Aut 2021 - Cégep de Rivière-du-Loup
+ * 
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,17 +16,25 @@ use App\Models\Departement;
 use App\Models\Categorie;
 
 class VoyagesAdminControleur extends Controller{
+    /**
+     * Permet d'afficher les voyages qctifs
+     *
+     * @return void
+     */
     public function accueil(){
-        if(session()->missing('administrateur')){ return redirect('/'); }
-
         $listeVoyages = Voyage::select("voyage.id as idVoyage", "voyage.*", "departement.*", "categorie.*")->join('departement', 'voyage.departement_id', '=', 'departement.id')->join('categorie', 'voyage.categorie_id', '=', 'categorie.id')->where("actif", '=', 1)->orderByDesc('dateDebut')->get();
         
         return view('admin.voyages')->with('listeVoyages', $listeVoyages);
     }
 
+    /**
+     * Permet l'edition ou la création d'un voyage
+     *
+     * @param [type] $mode
+     * @param [type] $idVoyage
+     * @return void
+     */
     public function editionVoyage($mode, $idVoyage = null){
-        if(session()->missing('administrateur')){ return redirect('/'); }
-
         if($idVoyage != null){
             $voyage = Voyage::find($idVoyage);
 
@@ -30,9 +46,13 @@ class VoyagesAdminControleur extends Controller{
         return view('admin.editionVoyage')->with('listeDepartements', Departement::all())->with('listeCategories', Categorie::all())->with('mode', $mode)->with('idVoyage', $idVoyage);
     }
 
+    /**
+     * Permet l'enregistrement ou l'update d'un voyage
+     *
+     * @param Request $request
+     * @return void
+     */
     public function enregistrerVoyage(Request $request){
-        if(session()->missing('administrateur')){ return redirect('/'); }
-
         $lesDepartements = Departement::all();
         $lesCategories = Categorie::all();
         $departementsPossibles = $lesDepartements->count();

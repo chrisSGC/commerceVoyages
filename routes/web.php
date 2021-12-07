@@ -47,32 +47,42 @@ Route::get('/contact', [ContactControleur::class, 'contact'])->name('contact.pag
 Route::get('/connexion', [ConnexionControleur::class, 'connexion'])->name('connexion.page');
 Route::post('/connexion/validerConnexion', [ConnexionControleur::class, 'validerConnexion'])->name('connexion.validerConnexion');
 Route::post('/connexion/validerInscription', [ConnexionControleur::class, 'validerInscription'])->name('connexion.validerInscription');
-//Route::post('/connexion/verifierCompte', [ConnexionControleur::class, 'verifierCompte'])->name('connexion.verifier');
 Route::get('/deconnexion', [ConnexionControleur::class, 'deconnexion'])->name('deconnexion.page');
 
-Route::get('/historique', [CompteControleur::class, 'historique'])->name('historique.page');
+// Groupe de routes protégées par le middleware de connexion classique
+Route::middleware(['customAuth'])->group(function(){
+    // Historique des commandes
+    Route::get('/historique', [CompteControleur::class, 'historique'])->name('historique.page');
 
-Route::get('/commande', [CommandeControleur::class, 'commande'])->name('commande.page');
-Route::post('/commande/validerCommande', [CommandeControleur::class, 'validerCommande'])->name('commande.validerCommande');
-Route::get('/commande/confirmer', [CommandeControleur::class, 'confirmer'])->name('commande.confirmerCommande');
+    // Fin de la commande
+    Route::get('/commande', [CommandeControleur::class, 'commande'])->name('commande.page');
+    Route::post('/commande/validerCommande', [CommandeControleur::class, 'validerCommande'])->name('commande.validerCommande');
+    Route::get('/commande/confirmer', [CommandeControleur::class, 'confirmer'])->name('commande.confirmerCommande');
+});
 
-Route::get('/dashboard', [TableauDeBordControleur::class, 'accueil'])->name('dashboard.page');
-Route::get('/gestion/ventes', [VentesAdminControleur::class, 'accueil'])->name('ventes.page');
-Route::get('/gestion/ventes/details/{id}', [VentesAdminControleur::class, 'detailsPaiements'])->name('ventes.paiements');
-Route::post('/gestion/ventes/ajouterPaiement', [VentesAdminControleur::class, 'ajouterPaiement'])->name('ventes.ajouterPaiement');
-Route::post('/gestion/ventes/ajouterVente', [VentesAdminControleur::class, 'ajouterVente'])->name('ventes.ajouterVente');
-Route::get('/gestion/ventes/supprimerPaiement/{id}', [VentesAdminControleur::class, 'supprimerPaiement'])->name('ventes.supprimerPaiement');
-Route::get('/gestion/ventes/annulerVente/{id}', [VentesAdminControleur::class, 'annulerVente'])->name('ventes.annulerVente');
-Route::get('/gestion/voyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');
-Route::get('/gestion/supprimerVoyage/{id}', [VoyagesAdminControleur::class, 'supprimerVoyage'])->name('voyages.supprimerVoyage');
-/*Route::get('/nouveauVoyage', [VoyagesAdminControleur::class, 'nouveauVoyage'])->name('voyages.nouveauVoyage');
-Route::post('/ajouterVoyage', [VoyagesAdminControleur::class, 'ajouterVoyage'])->name('voyages.ajouterVoyage');*/
-Route::get('/gestion/editionVoyage/{mode}/{id?}', [VoyagesAdminControleur::class, 'editionVoyage'])->name('voyages.editionVoyage');
-Route::post('/gestion/enregistrerVoyage', [VoyagesAdminControleur::class, 'enregistrerVoyage'])->name('voyages.enregistrerVoyage');
+// Groupe de routes protégées par le middleware de connexion admin
+Route::middleware(['customAuthAdmin'])->group(function(){
+    // Accueil admin
+    Route::get('/dashboard', [TableauDeBordControleur::class, 'accueil'])->name('dashboard.page');
 
-Route::get('/gestion/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
-/*Route::get('/nouveauClient', [ClientsAdminControleur::class, 'nouveauClient'])->name('clients.nouveauClient');
-Route::post('/ajouterClient', [ClientsAdminControleur::class, 'ajouterClient'])->name('clients.ajouterClient');
-Route::get('/modifierClient/{id}', [ClientsAdminControleur::class, 'modifierClient'])->name('clients.modifierClient');*/
-Route::get('/gestion/editionClient/{mode}/{id?}', [ClientsAdminControleur::class, 'editionClient'])->name('clients.editionClient');
-Route::post('/gestion/enregistrerClient', [ClientsAdminControleur::class, 'enregistrerClient'])->name('clients.enregistrerClient');
+    // Ventes admin
+    Route::get('/gestion/ventes', [VentesAdminControleur::class, 'accueil'])->name('ventes.page');
+    Route::post('/gestion/ventes/ajouterVente', [VentesAdminControleur::class, 'ajouterVente'])->name('ventes.ajouterVente');
+    Route::get('/gestion/ventes/annulerVente/{id}', [VentesAdminControleur::class, 'annulerVente'])->name('ventes.annulerVente');
+    Route::get('/gestion/ventes/details/{id}', [VentesAdminControleur::class, 'detailsPaiements'])->name('ventes.paiements');
+    Route::post('/gestion/ventes/ajouterPaiement', [VentesAdminControleur::class, 'ajouterPaiement'])->name('ventes.ajouterPaiement');
+    Route::get('/gestion/ventes/supprimerPaiement/{id}', [VentesAdminControleur::class, 'supprimerPaiement'])->name('ventes.supprimerPaiement');
+
+    // Voyages admin
+    Route::get('/gestion/voyages', [VoyagesAdminControleur::class, 'accueil'])->name('voyages.page');
+    Route::get('/gestion/supprimerVoyage/{id}', [VoyagesAdminControleur::class, 'supprimerVoyage'])->name('voyages.supprimerVoyage');
+    Route::get('/gestion/editionVoyage/{mode}/{id?}', [VoyagesAdminControleur::class, 'editionVoyage'])->name('voyages.editionVoyage');
+    Route::post('/gestion/enregistrerVoyage', [VoyagesAdminControleur::class, 'enregistrerVoyage'])->name('voyages.enregistrerVoyage');
+
+    // Clients admin
+    Route::get('/gestion/clients', [ClientsAdminControleur::class, 'accueil'])->name('clients.page');
+    Route::get('/gestion/editionClient/{mode}/{id?}', [ClientsAdminControleur::class, 'editionClient'])->name('clients.editionClient');
+    Route::post('/gestion/enregistrerClient', [ClientsAdminControleur::class, 'enregistrerClient'])->name('clients.enregistrerClient');
+
+    // Statistiques admin
+});

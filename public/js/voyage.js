@@ -1,3 +1,6 @@
+/**
+ * Permet d'ajouter un voyage au panier
+ */
 const ajouterVoyageAuPanier = async (idVoyage) => {
     let csrfToken = document.getElementById('csrf').childNodes[0].value;
     let data = new FormData();

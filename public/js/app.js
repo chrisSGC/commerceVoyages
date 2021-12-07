@@ -1,5 +1,6 @@
-//document.getElementById('btnPlusVoyages').addEventListener('click', (e) => { e.preventDefault(); alert('clicked'); });
-
+/**
+ * Permet d'aller chercher plus de voyages
+ */
 document.getElementById('btnPlusVoyages').addEventListener('click', async (e) => {
     e.preventDefault();
     

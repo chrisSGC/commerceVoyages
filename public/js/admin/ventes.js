@@ -1,3 +1,8 @@
+/**
+ * Permet de lister les paiements recus pour une vente
+ * 
+ * @param {*} idVente
+ */
 const afficherPaiements = async (idVente) => {
     if(document.getElementById("paiements_"+idVente).classList.contains("d-none")){
         if(!isNaN(idVente)){
@@ -6,33 +11,44 @@ const afficherPaiements = async (idVente) => {
                 headers: {'Accept': 'application/json' }
             });
 
-            const paiementsTrouves = await detailsPaiements.json();
-
-            if(paiementsTrouves.code === 200){
-                if(paiementsTrouves.donnees.length > 0){
-                    let contenu = '';
-
-                    paiementsTrouves.donnees.map(paiement => { contenu += "<tr><td>&nbsp;&nbsp;</td><td>"+paiement.id+"</td><td>"+paiement.datePaiement+"</td><td>"+paiement.montantPaiement+"$</td><td><span class='badge bg-danger' onClick='supprimerPaiement(this, "+paiement.id+")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/></svg></span></td></tr>" });
-
-                    document.getElementById("listePaiements_"+idVente).innerHTML = contenu;
-                }else{
-                    document.getElementById("listePaiements_"+idVente).innerHTML = "<tr><th colspan='5' class='text-center'>Aucun paiement pour cette vente.</th></tr>";
-                }
+            if(detailsPaiements.status === 422){
+                Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
             }else{
-                document.getElementById("listePaiements_"+idVente).innerHTML = "<tr><th colspan='5' class='text-center'>Aucun paiement ne peut etre affiche.</th></tr>";
+                const paiementsTrouves = await detailsPaiements.json();
+
+                if(paiementsTrouves.code === 200){
+                    if(paiementsTrouves.donnees.length > 0){
+                        let contenu = '';
+
+                        paiementsTrouves.donnees.map(paiement => { contenu += "<tr><td>&nbsp;&nbsp;</td><td>"+paiement.id+"</td><td>"+paiement.datePaiement+"</td><td>"+paiement.montantPaiement+"$</td><td><span class='badge bg-danger' onClick='supprimerPaiement(this, "+paiement.id+")'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'><path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/></svg></span></td></tr>" });
+
+                        document.getElementById("listePaiements_"+idVente).innerHTML = contenu;
+                    }else{
+                        document.getElementById("listePaiements_"+idVente).innerHTML = "<tr><th colspan='5' class='text-center'>Aucun paiement pour cette vente.</th></tr>";
+                    }
+                }else{
+                    document.getElementById("listePaiements_"+idVente).innerHTML = "<tr><th colspan='5' class='text-center'>Aucun paiement ne peut etre affiche.</th></tr>";
+                }
+                document.getElementById("paiements_"+idVente).classList.remove("d-none");
             }
-            document.getElementById("paiements_"+idVente).classList.remove("d-none");
         }
-        
     }else{
         document.getElementById("paiements_"+idVente).classList.add("d-none");
     }
 }
 
+/**
+ * Permet d'envoyer l'id de la vente vers le modal bootstrap
+ *
+ * @param {*} idVente
+ */
 const ajouterPaiement = (idVente) => {
     document.getElementById("idVenteAssociee").value = idVente;
 }
 
+/**
+ * Permet d'ajouter un paiement à la vente
+ */
 document.getElementById('validerAjout').addEventListener("click", async (event) => {
     event.preventDefault();
     let form = new FormData(document.getElementById("formAjoutPaiement"));
@@ -42,27 +58,36 @@ document.getElementById('validerAjout').addEventListener("click", async (event) 
         headers: {'Accept': 'application/json' }
     });
 
-    const paiementResultat = await ajoutPaiement.json();
-
-    if(paiementResultat.code === 200){
-        document.getElementById("erreurAjout").classList.remove("d-none");
-        document.getElementById("erreurAjout").classList.add("alert-success");
-        document.getElementById("erreurAjoutTitre").innerText = "Succes!";
-        document.getElementById("erreurAjoutContenu").innerText = "Le paiement a bien ete ajoute.";
-        window.removeEventListener("click", document.getElementById("validerAjout"));
-        document.getElementById("validerAjout").setAttribute("disabled", "disabled");
-        document.getElementById("annulerAjout").innerText = "Quitter!";
-
-        // settimeout reload
-        setTimeout(() => { location.reload(); }, 2000);
+    if(ajoutPaiement.status === 422){
+        Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
     }else{
-        document.getElementById("erreurAjout").classList.remove("d-none");
-        document.getElementById("erreurAjout").classList.add("alert-danger");
-        document.getElementById("erreurAjoutTitre").innerText = "Erreur!";
-        document.getElementById("erreurAjoutContenu").innerText = "Une erreur est survenue durant l'ajout. Merci de recommencer.";
+        const paiementResultat = await ajoutPaiement.json();
+
+        if(paiementResultat.code === 200){
+            document.getElementById("erreurAjout").classList.remove("d-none");
+            document.getElementById("erreurAjout").classList.add("alert-success");
+            document.getElementById("erreurAjoutTitre").innerText = "Succes!";
+            document.getElementById("erreurAjoutContenu").innerText = "Le paiement a bien été ajouté.";
+            window.removeEventListener("click", document.getElementById("validerAjout"));
+            document.getElementById("validerAjout").setAttribute("disabled", "disabled");
+            document.getElementById("annulerAjout").innerText = "Quitter!";
+            
+            Toastify({ text: "Paiement ajouté.", duration: 3000, style: {background: "rgb(5, 150, 105)"} }).showToast();
+
+            // settimeout reload
+            setTimeout(() => { location.reload(); }, 2000);
+        }else{
+            document.getElementById("erreurAjout").classList.remove("d-none");
+            document.getElementById("erreurAjout").classList.add("alert-danger");
+            document.getElementById("erreurAjoutTitre").innerText = "Erreur!";
+            document.getElementById("erreurAjoutContenu").innerText = "Une erreur est survenue durant l'ajout. Merci de recommencer.";
+        }
     }
 });
 
+/**
+ * Permet de valider l'ajout d'une vente
+ */
 document.getElementById("validerAjoutVente").addEventListener("click", async (event) => {
     event.preventDefault();
     let form = new FormData(document.getElementById("formAjoutVente"));
@@ -72,30 +97,42 @@ document.getElementById("validerAjoutVente").addEventListener("click", async (ev
         headers: {'Accept': 'application/json' }
     });
 
-    const ajoutVenteResultat = await ajoutVente.json();
-
-    if(ajoutVenteResultat.code === 200){
-        document.getElementById("erreurAjoutVente").classList.remove("d-none");
-        document.getElementById("erreurAjoutVente").classList.add("alert-success");
-        document.getElementById("erreurAjoutVenteTitre").innerText = "Succes!";
-        document.getElementById("erreurAjoutVenteContenu").innerText = "La vente a bien ete ajoutee.";
-        window.removeEventListener("click", document.getElementById("validerAjoutVente"));
-        document.getElementById("validerAjoutVente").setAttribute("disabled", true);
-        document.getElementById("annulerAjoutVente").innerText = "Quitter!";
-
-        // settimeout reload
-        setTimeout(() => { location.reload(); }, 2000);
+    if(ajoutVente.status === 422){
+        Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
     }else{
-        document.getElementById("erreurAjoutVente").classList.remove("d-none");
-        document.getElementById("erreurAjoutVente").classList.add("alert-danger");
-        document.getElementById("erreurAjoutVenteTitre").innerText = "Erreur!";
-        document.getElementById("erreurAjoutVenteContenu").innerText = "Une erreur est survenue durant l'ajout. Merci de recommencer.";
+        const ajoutVenteResultat = await ajoutVente.json();
+
+        if(ajoutVenteResultat.code === 200){
+            document.getElementById("erreurAjoutVente").classList.remove("d-none");
+            document.getElementById("erreurAjoutVente").classList.add("alert-success");
+            document.getElementById("erreurAjoutVenteTitre").innerText = "Succes!";
+            document.getElementById("erreurAjoutVenteContenu").innerText = "La vente a bien été ajoutée.";
+            window.removeEventListener("click", document.getElementById("validerAjoutVente"));
+            document.getElementById("validerAjoutVente").setAttribute("disabled", true);
+            document.getElementById("annulerAjoutVente").innerText = "Quitter!";
+
+            Toastify({ text: "Vente ajoutée.", duration: 3000, style: {background: "rgb(5, 150, 105)"} }).showToast();
+
+            // settimeout reload
+            setTimeout(() => { location.reload(); }, 2000);
+        }else{
+            document.getElementById("erreurAjoutVente").classList.remove("d-none");
+            document.getElementById("erreurAjoutVente").classList.add("alert-danger");
+            document.getElementById("erreurAjoutVenteTitre").innerText = "Erreur!";
+            document.getElementById("erreurAjoutVenteContenu").innerText = "Une erreur est survenue durant l'ajout. Merci de recommencer.";
+        }
     }
 });
 
+/**
+ * Retrait des submit sur les formulaires de la page
+ */
 window.removeEventListener("submit", document.getElementById("formAjoutVente"));
 window.removeEventListener("submit", document.getElementById("formAjoutPaiement"));
 
+/**
+ * Permet de recalculer le prix du voyage quand on change quelque chose dans la vente afin d'avoir le prix juste en tout temps
+ */
 document.getElementById("formAjoutVente").addEventListener("change", () => {
     let idVoyageSelectionne = document.getElementById("voyage").value;
 
@@ -114,30 +151,49 @@ document.getElementById("formAjoutVente").addEventListener("change", () => {
     }
 });
 
+/**
+ * Permet de supprimer un paiement sur un voyage
+ * @param {*} el 
+ * @param {*} idPaiement 
+ */
 const supprimerPaiement = async (el, idPaiement) => {
-    
     const retraitPaiement = await fetch('/gestion/ventes/supprimerPaiement/'+idPaiement, {
         method: "GET", 
         headers: {'Accept': 'application/json' }
     });
 
-    const retraitPaiementResultat = await retraitPaiement.json();
+    if(retraitPaiement.status === 422){
+        Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
+    }else{
+        const retraitPaiementResultat = await retraitPaiement.json();
 
-    if(retraitPaiementResultat.code === 200){
-        el.parentNode.parentNode.remove();
+        if(retraitPaiementResultat.code === 200){
+            el.parentNode.parentNode.remove();
+            Toastify({ text: "Paiement supprimé.", duration: 3000, style: {background: "rgb(5, 150, 105)"} }).showToast();
+        }
     }
 }
 
+/**
+ * Permet d'annuler une vente
+ *
+ * @param {*} el
+ * @param {*} idvente
+ */
 const annulerVente = async (el, idvente) => {
     const retraitVente = await fetch('/gestion/ventes/annulerVente/'+idvente, {
         method: "GET", 
         headers: {'Accept': 'application/json' }
     });
 
-    const retraitVenteResultat = await retraitVente.json();
+    if(retraitVente.status === 422){
+        Toastify({ text: "Une erreur est survenue.", duration: 3000, style: {background: "linear-gradient(to right, rgb(245, 158, 11), rgb(239, 68, 68))"}}).showToast();
+    }else{
+        const retraitVenteResultat = await retraitVente.json();
 
-    if(retraitVenteResultat.code === 200){
-        el.parentNode.parentNode.remove();
-        Toastify({ text: "Vente annulee avec succes.", duration: 3000 }).showToast();
+        if(retraitVenteResultat.code === 200){
+            el.parentNode.parentNode.remove();
+            Toastify({ text: "Vente annulée.", duration: 3000, style: {background: "rgb(5, 150, 105)"} }).showToast();
+        }
     }
 }

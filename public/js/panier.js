@@ -76,6 +76,9 @@ const ajouterUn = async (el) => {
     }
 }
 
+/**
+ * Permet de supprimer un item du panier
+ */
 const supprimer = async (el) => {
     let idPanier = el.parentNode.parentNode.getAttribute("data-idPanier");
     let csrfToken = document.getElementsByName("_token")[0].value;

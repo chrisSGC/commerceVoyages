@@ -1,5 +1,13 @@
 <?php
-
+/***
+ * @author Christophe Ferru <christophe.ferru@gmail.com>
+ * @copyright 2021 Christophe Ferru
+ * @project YvanDesVoyages
+ * @system Gestion de compte / compte client
+ * 
+ * TP Fin de session Programmation web Avancée - Aut 2021 - Cégep de Rivière-du-Loup
+ * 
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -17,16 +25,39 @@ class ConnexionControleur extends Controller{
         return $array;
     }
 
-    public function connexion(Request $request){
+    /**
+     * Page de connexion / inscription
+     * 
+     * On retourne la vue avec la liste des premiers contacts possibles
+     *
+     * @return void
+     */
+    public function connexion(){
         return view('connexion')->with('erreurConnexion', 0)->with('premierContact', Premiercontact::All());
     }
 
+    /**
+     * Déconnexion
+     * 
+     * On supprime les sessions et on redirige vers l'accueil
+     *
+     * @param Request $request
+     * @return void
+     */
     public function deconnexion(Request $request){
         $request->session()->forget('utilisateur');
         $request->session()->forget('administrateur');
         return redirect('/');
     }
 
+    /**
+     * Validation de l'inscription
+     * 
+     * Si l'inscription passe les validations, on crée un nouveau client puis une session et on reidirge vers la fin de 
+     *
+     * @param Request $request
+     * @return void
+     */
     public function validerInscription(Request $request){
         $erreurConnexion = 0;
         $premierContact = Premiercontact::All();
@@ -56,6 +87,16 @@ class ConnexionControleur extends Controller{
 
     }
 
+    /**
+     * Validation de la connexion
+     * 
+     * Si l'adresse est admin@admin.ca et que le mdp est amdin, on connecte en tant qu'admin
+     * 
+     * Sinon on vérifie la concordance dans la bd
+     *
+     * @param Request $request
+     * @return void
+     */
     public function validerConnexion(Request $request){
         $erreurConnexion = 0;
 
@@ -89,6 +130,13 @@ class ConnexionControleur extends Controller{
         return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', Premiercontact::All());
     }
 
+    /**
+     * Ajax vérification de compte des
+     * N'est plus utilisée
+     *
+     * @param Request $request
+     * @return void
+     */
     public function verifierCompte(Request $request){
         $request->validate(['email'=> ['required', 'email', 'email:rfc,dns'], 'identifiant' => ['required', 'alpha_num']]);
         
@@ -105,10 +153,23 @@ class ConnexionControleur extends Controller{
         }
     }
     
+    /**
+     * PErmet d'encrypter une donnée à la BCrypt
+     *
+     * @param [type] $aEncoder
+     * @return void
+     */
     private function crypterDonnee($aEncoder){
         return password_hash($aEncoder, PASSWORD_DEFAULT);
     }
 
+    /**
+     * Permet de valider qu'une donnée correpsond à une donnée encryptée
+     *
+     * @param [type] $aVerifier
+     * @param [type] $hash
+     * @return void
+     */
     private function verifierConcordance($aVerifier, $hash){
         return password_verify($aVerifier, $hash);
     }
