@@ -34,7 +34,7 @@ class CompteControleur extends Controller{
                 $contenuFinal[] = ["nomVoyage" => $vente->nomVoyage, "dateVente" => $vente->dateVente, "quantite" => $vente->quantite, 'prix' => $vente->prix, 'montantPercu' => $montant, 'etatPaiement' => (($montant == ($vente->quantite * $vente->prix)) ? true : false), 'etatVente' => $vente->etat];
             }
 
-            return view('achats')->with('contenuVentes', json_decode(json_encode($contenuFinal), FALSE));
+            return view('membre.achats')->with('contenuVentes', json_decode(json_encode($contenuFinal), FALSE));
         }
     }
 }

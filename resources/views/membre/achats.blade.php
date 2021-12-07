@@ -58,6 +58,8 @@
                                     @endif
                                     @if($item->etatVente == 0)
                                         <th class="text-center"><span class="badge badge-danger">Vente annulée</span></th> 
+                                    @else
+                                        <th></th>
                                     @endif
                                 </tr>
                             @endforeach
