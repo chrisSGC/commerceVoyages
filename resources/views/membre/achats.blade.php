@@ -22,6 +22,9 @@
     
     <div class="shopping-cart section">
         <div class="container">
+            <div class="row mb-4">
+                <div class="col-12"><a href="/paiement" class="btn btn-primary">Faire un paiement</a></div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <!-- Shopping Summery -->

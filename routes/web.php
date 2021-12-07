@@ -54,6 +54,10 @@ Route::middleware(['customAuth'])->group(function(){
     // Historique des commandes
     Route::get('/historique', [CompteControleur::class, 'historique'])->name('historique.page');
 
+    // Ajout de paiement
+    Route::get('/paiement', [CompteControleur::class, 'paiement'])->name('paiement.page');
+    Route::post('/validerPaiement', [CompteControleur::class, 'validerPaiement'])->name('paiement.validation');
+
     // Fin de la commande
     Route::get('/commande', [CommandeControleur::class, 'commande'])->name('commande.page');
     Route::post('/commande/validerCommande', [CommandeControleur::class, 'validerCommande'])->name('commande.validerCommande');

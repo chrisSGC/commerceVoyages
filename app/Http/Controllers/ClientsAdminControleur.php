@@ -95,9 +95,7 @@ class ClientsAdminControleur extends Controller{
         $client->premierContact_id = $request->premierContact;
         $client->save();
 
-        if($client->id){ return redirect('/gestion/clients'); }
-
-        return view('admin.editionClient')->with('listeProvinces', Province::all())->with('listePremiersContacts', Premiercontact::All())->with('mode', $request->mode)->with('idClient', $request->idClient);
+        return redirect('/gestion/clients');
     }
 
     /**

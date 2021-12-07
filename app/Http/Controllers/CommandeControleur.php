@@ -18,16 +18,6 @@ use App\Models\Vente;
 use App\Models\Paiement;
 
 class CommandeControleur extends Controller{
-    private function listeProvinces(){
-        $array = [];
-
-        foreach(Province::all() as $province){
-            $array[] = $province->id;
-        }
-
-        return $array;
-    }
-
     /**
      * Affiche le résumé de la commande du client
      *
@@ -95,15 +85,10 @@ class CommandeControleur extends Controller{
 
             // vider le panier
             Panier::where('id', $item->idPanier)->delete();
-
-            $compteurPaye++;
         }
 
-        if($compteurPaye != 0){
-            return redirect('/commande/confirmer');
-        }else{
-            return view('membre.commande')->with('utilisateur', $utilisateur)->with('provinces', Province::all())->with('contenuPanier', $contenuPanier)->with('nombreArticles', $nombreArticles)->with('montant', $montant);
-        }
+        return redirect('/commande/confirmer');
+
     }
 
     /**

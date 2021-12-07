@@ -70,8 +70,6 @@ class VoyagesAdminControleur extends Controller{
         $voyage->categorie_id = $request->categorieVoyage;
         $voyage->save();
 
-        if($voyage->id){ return redirect('/gestion/voyages'); }
-
-        return view('admin.editionVoyage')->with('listeDepartements', $lesDepartements)->with('listeCategories', $lesCategories)->with('mode', $request->mode)->with('idVoyage', $request->idVoyage);
+        return redirect('/gestion/voyages');
     }
 }

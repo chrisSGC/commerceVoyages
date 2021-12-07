@@ -71,8 +71,6 @@ class ConnexionControleur extends Controller{
 
         if(session('utilisateur')){ return ($request->provenance == 2) ? redirect('/commande') : redirect('/'); }
 
-        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', $premierContact)->with('provenance', $request->provenance);
-
     }
 
     /**
@@ -114,8 +112,6 @@ class ConnexionControleur extends Controller{
                 $erreurConnexion = 1;
             }
         }
-        
-        return view('connexion')->with('erreurConnexion', $erreurConnexion)->with('premierContact', Premiercontact::All())->with('provenance', $request->provenance);
     }
     
     /**

@@ -35,7 +35,7 @@ class VentesAdminControleur extends Controller{
             $listeVentesFinale[] = ["idVente" => $vente->idVente, "nomVoyage" => $vente->nomVoyage, "dateVente" => $vente->dateVente, "quantite" => $vente->quantite, 'prix' => $vente->prix, 'montantPercu' => $montant, 'nomClient' => $vente->prenom.' '.$vente->nom, 'etatVente' => (($montant >= ($vente->quantite * $vente->prix)) ? true : false)];
         }
         
-        return view('admin.ventes')->with('listeVentesFinale', json_decode(json_encode($listeVentesFinale), FALSE))->with("listeVoyages", Voyage::all())->with("listeClients", Client::all());
+        return view('admin.ventes')->with('listeVentesFinale', json_decode(json_encode($listeVentesFinale), FALSE))->with("listeVoyages", Voyage::where('actif', '=', 1)->get())->with("listeClients", Client::all());
     }
     
     /**
