@@ -169,9 +169,7 @@
                                                             @endforeach
                                                         </ul>
                                                     </li>
-                                                    <li><a href="/agence">L'agence</a></li>
                                                     <li><a href="/panier">Panier <span id="articles" class="total-count">{{\App\Http\Controllers\PanierControleur::$nombreArticles}}</span></a></li>
-                                                    <li><a href="/contact">Contactez-nous</a></li>
                                                     @if(\App\Http\Controllers\CompteControleur::verifierConnexion())
                                                         <li><a href="/historique">Mes achats</a></li>
                                                         <li><a href="/deconnexion" class="button button-contactForm boxed-btn">Déconnexion</a></li>
