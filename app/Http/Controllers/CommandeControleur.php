@@ -49,9 +49,9 @@ class CommandeControleur extends Controller{
     public function validerCommande(Request $request){
         $utilisateur = Client::find($request->session()->get('utilisateur'))->first();
         $montant = $compteurPaye = 0;
-        $request['provincePossibles'] = $this->listeProvinces();
+        //$request['provincePossibles'] = $this->listeProvinces();
         $annee = date("Y");
-        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('client_id', $utilisateur->id)->get();
+        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('client_id', $request->session()->get('utilisateur'))->get();
         $compteurPanier = $contenuPanier->count();
 
         $nombreArticles = $contenuPanier->sum("quantite");
@@ -76,6 +76,7 @@ class CommandeControleur extends Controller{
             $vente->prix_paye = $item->prix;
             $vente->save();
 
+            // A REVOIR panier
             // ajouter paiement
             $paiement = new Paiement();
             $paiement->datePaiement = $date;
