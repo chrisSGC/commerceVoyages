@@ -158,7 +158,7 @@
                                 <h2>nous sommes <br>YvanDvoyages</h2>
                             </div>
                             <div class="support-caption">
-                                <p>Le leader de alv ente de voyages illégaux vers la France car nous n'avons aucun permis de l'OPC.</p>
+                                <p>Le leader de la vente de voyages illégaux vers la France car nous n'avons aucun permis de l'OPC.</p>
                                 <div class="select-suport-items">
                                     <label class="single-items">Aucun permis de l'OPC
                                         <input type="checkbox" checked="checked active">
