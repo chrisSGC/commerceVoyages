@@ -178,7 +178,12 @@ class PanierControleur extends Controller{
         }
 
         // recupere la quantite pour idPanier et ip
-        $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->orWhere("client_id", "=", session()->get('utilisateur'))->get();
+        //$itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->orWhere("client_id", "=", session()->get('utilisateur'))->get();
+        if(session()->missing('utilisateur')){
+            $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->get();
+        }else{
+            $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("client_id", "=", session()->get('utilisateur'))->get();
+        }
 
         // Si resultat
         if($itemAjoute){

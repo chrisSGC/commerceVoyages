@@ -31,6 +31,10 @@ const retirerUn = async (el) => {
             // affiche la qte retournee
             el.nextSibling.innerText = retourRetrait.donnees.quantite;
 
+            if(retourRetrait.donnees.quantite == 0){
+                document.getElementById("ligne"+idPanier).parentElement.removeChild(document.getElementById("ligne"+idPanier));
+            }
+
             // calcul nouveau prix, calcul nouvelles taxes, calcul nouveua total
             let a = document.getElementById("pu"+idPanier).innerText.slice(0, -2).replace(",",".").replace(" ","") * retourRetrait.donnees.quantite;
             document.getElementById("prix"+idPanier).innerText = a+" $"

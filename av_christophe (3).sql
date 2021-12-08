@@ -21,6 +21,11 @@ SET time_zone = "+00:00";
 -- Base de données : `av_christophe`
 --
 
+--
+-- Base de données : `av_christophe`
+--
+CREATE DATABASE IF NOT EXISTS `av_christophe` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `av_christophe`;
 -- --------------------------------------------------------
 
 --
