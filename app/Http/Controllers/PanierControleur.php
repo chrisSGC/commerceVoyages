@@ -29,7 +29,11 @@ class PanierControleur extends Controller{
      * @return void
      */
     public static function initialiserPanier(){
-        self::$contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->get();
+        if(session()->missing('utilisateur')){
+            self::$contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->get();
+        }else{
+            self::$contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where("client_id", "=", session()->get('utilisateur'))->get();
+        }
 
         self::$nombreArticles = self::$contenuPanier->sum("quantite");
 
@@ -60,13 +64,17 @@ class PanierControleur extends Controller{
         $ip = $request->ip();
 
         // recupere la quantite pour idPanier et ip
-        $item = Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->first();
+        $item = Panier::where("id", "=", $request->idPanier)->first();
 
         // Si resultat
         if($item){
             $nouvelleQuantite = $item->quantite - 1;
 
-            Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->update(["quantite" => $nouvelleQuantite]);
+            if($nouvelleQuantite == 0){
+                Panier::destroy($request->idPanier);
+            }else{
+                Panier::where("id", "=", $request->idPanier)->update(["quantite" => $nouvelleQuantite]);
+            }
 
             // On initialise le panier a nouveua pour envoyer le montant global du panier actualise
             self::initialiserPanier();
@@ -88,13 +96,13 @@ class PanierControleur extends Controller{
         $ip = $request->ip();
 
         // recupere la quantite pour idPanier et ip
-        $item = Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->first();
+        $item = Panier::where("id", "=", $request->idPanier)->first();
 
         // Si resultat
         if($item){
             $nouvelleQuantite = $item->quantite + 1;
 
-            Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->update(["quantite" => $nouvelleQuantite]);
+            Panier::where("id", "=", $request->idPanier)->update(["quantite" => $nouvelleQuantite]);
 
             // On initialise le panier a nouveua pour envoyer le montant global du panier actualise
             self::initialiserPanier();
@@ -116,11 +124,11 @@ class PanierControleur extends Controller{
         $ip = $request->ip();
 
         // recupere la quantite pour idPanier et ip
-        $item = Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->first();
+        $item = Panier::where("id", "=", $request->idPanier)->first();
 
         // Si resultat
         if($item){
-            Panier::where("id", "=", $request->idPanier)->where("ip", "=", $ip)->delete();
+            Panier::where("id", "=", $request->idPanier)->delete();
 
             // une fois supprime, on initialise a nouveau le panier puis on retourne le montant total du panier pour actualiser les montants
             self::initialiserPanier();
@@ -141,24 +149,36 @@ class PanierControleur extends Controller{
         $ip = $request->ip();
 
         // On vérifie si l'item existe déjà
-        $presenceItem = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->first();
+        if(session()->missing('utilisateur')){
+            $presenceItem = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->first();
+        }else{
+            $presenceItem = Panier::where("voyage_id", "=", $request->idVoyage)->where("client_id", "=", session()->get('utilisateur'))->first();
+        }
+        //$presenceItem = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->orWhere("client_id", "=", session()->get('utilisateur'))->first();
 
         if($presenceItem){
             // on ajoute 1 à la quantité
             $nouvelleQuantite = $presenceItem->quantite + 1;
 
-            Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->update(["quantite" => $nouvelleQuantite]);
+            if(session()->missing('utilisateur')){
+                Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->update(["quantite" => $nouvelleQuantite]);
+            }else{
+                Panier::where("voyage_id", "=", $request->idVoyage)->where("client_id", "=", session()->get('utilisateur'))->update(["quantite" => $nouvelleQuantite]);
+            }
+
+            //Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->orWhere("client_id", "=", session()->get('utilisateur'))->update(["quantite" => $nouvelleQuantite]);
         }else{
             // On crée l'occurence
             $item = new Panier();
             $item->voyage_id = $request->idVoyage;
-            $item->ip = $ip;
+            $item->ip = (session()->missing('utilisateur')) ? $ip : null;
+            $item->client_id = (session()->missing('utilisateur')) ? null : session()->get('utilisateur');
             $item->quantite = 1;
             $item->save();
         }
 
         // recupere la quantite pour idPanier et ip
-        $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->get();
+        $itemAjoute = Panier::where("voyage_id", "=", $request->idVoyage)->where("ip", "=", $ip)->orWhere("client_id", "=", session()->get('utilisateur'))->get();
 
         // Si resultat
         if($itemAjoute){

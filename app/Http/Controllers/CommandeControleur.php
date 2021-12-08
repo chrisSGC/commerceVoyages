@@ -29,7 +29,7 @@ class CommandeControleur extends Controller{
 
         $montant = 0;
         $annee = date("Y");
-        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->get();
+        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->orWhere("client_id", "=", session()->get('utilisateur'))->get();
 
         $nombreArticles = $contenuPanier->sum("quantite");
 
@@ -51,7 +51,7 @@ class CommandeControleur extends Controller{
         $montant = $compteurPaye = 0;
         $request['provincePossibles'] = $this->listeProvinces();
         $annee = date("Y");
-        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('ip', \Request::ip())->get();
+        $contenuPanier = Panier::select("panier.id as idPanier", "panier.*", "voyage.*")->join('voyage', 'panier.voyage_id', '=', 'voyage.id')->where('client_id', $utilisateur->id)->get();
         $compteurPanier = $contenuPanier->count();
 
         $nombreArticles = $contenuPanier->sum("quantite");

@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Panier;
 use App\Models\Premiercontact;
 
 class ConnexionControleur extends Controller{
@@ -68,9 +69,9 @@ class ConnexionControleur extends Controller{
         $infosCompte = Client::select("id")->where('courriel', $request->courriel)->first();
         
         session(['utilisateur' => $infosCompte->id]);
+        Panier::where('ip', \Request::ip())->update(['client_id' => $infosCompte->id, 'ip' => null]);
 
         if(session('utilisateur')){ return ($request->provenance == 2) ? redirect('/commande') : redirect('/'); }
-
     }
 
     /**
@@ -102,6 +103,10 @@ class ConnexionControleur extends Controller{
                 if ($this->verifierConcordance($request->identifiant, $infosCompte->motDePasse)) {
                     // rediriger vers la page des infos de paiement
                     session(['utilisateur' => $infosCompte->id]);
+
+                    // récupere le contenu du panier
+                    Panier::where('ip', \Request::ip())->update(['client_id' => $infosCompte->id, 'ip' => null]);
+
                     return ($request->provenance == 2) ? redirect('/commande') : redirect('/');
                 } else {
                     // rester sur la page avec une erreur
