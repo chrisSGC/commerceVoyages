@@ -63,6 +63,8 @@ class CommandeControleur extends Controller{
         // modifier les infos client
         Client::where("id", "=", $request->session()->get('utilisateur'))->update(["adresse" => $request->adresse, "ville" => $request->ville, "cp" => $request->codePostal, "province_id" => $request->province, "telephone" => $request->telephone]);
 
+
+        //dd($contenuPanier);
         $date = new \DateTime();
         $date = $date->format('Y-m-d');
 
@@ -85,7 +87,8 @@ class CommandeControleur extends Controller{
             $paiement->save();
 
             // vider le panier
-            Panier::where('id', $item->idPanier)->delete();
+            //Panier::where('id', $item->idPanier)->delete();
+            Panier::destroy($item->idPanier);
         }
 
         return redirect('/commande/confirmer');
